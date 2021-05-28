@@ -53,6 +53,7 @@ public class LoginFrame extends JFrame {
 		
 		
 		
+		
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}//생성자------

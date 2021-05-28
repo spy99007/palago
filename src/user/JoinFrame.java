@@ -110,6 +110,7 @@ public class JoinFrame extends JFrame {
 		
 		
 		
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}//생성자------
 	

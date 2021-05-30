@@ -1,9 +1,20 @@
 package user;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.Hashtable;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+
 
 public class MyPageFrame extends JFrame {
 
@@ -16,10 +27,18 @@ public class MyPageFrame extends JFrame {
 	JTextField tfId,tfEmail,tfTel,tfNickName;
 	JPasswordField tfPwd;
 	JButton btChgPwd;
+	JoinFrame joinF;
+	Hashtable <String,User> userTable = new Hashtable<>();
+	ObjectInputStream in;
+	FileInputStream fin;
+	LoginFrame loginF;
+	
 	
 	public MyPageFrame() {
 		super("::MyPageFrame::");
 		Container cp = this.getContentPane();
+		
+		readFile("src/files/user.txt");
 		
 		cp.add(p, "Center");
 		p.setBackground(Color.white);
@@ -70,11 +89,56 @@ public class MyPageFrame extends JFrame {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}//생성자------
-
+	
 	public static void main(String[] args) {
 		MyPageFrame my = new MyPageFrame();
 		my.setSize(500, 600);
 		my.setVisible(true);
 	}
+	
+	/*마이페이지 회원정보를 불러오는 메소드*/
+	public void readFile(String fileName) {
+	   try {  
+		   	fin = new FileInputStream(fileName);
+		   	in = new ObjectInputStream(fin);
+//		   	in.defaultReadObject();
+		   	Object o = in.readObject();
+		   	userTable = (Hashtable<String,User>)o;
+		   	
+		   	
+		   	
+		   	System.out.println(userTable.get("id"));
+		   	
+		   	
+		   	
+//		   	System.out.println(userTable);
+		   	
+		   	System.out.println(fileName+"로드되었습니다.");
+		   	
+//		   	//tfId.setText();
+////		   	tfId.setText();
+//		   	tfNickName.setText("");
+//		   	char[] ch= tfPwd.getPassword();
+//		   	String pwd=new String(ch);
+//		   	tfPwd.setText(pwd);
+//		   	tfTel.setText("");
+//		   	tfEmail.setText("");
+//		   	
+		   	
+	   	   }catch(Exception e) {
+	   		   System.out.println("파일 불러오는 중 오류 "+e.getMessage());
+	   		   e.printStackTrace();
+	   	   }
+	   	
+	   	   
+	   
+	   		
+	     
+	     
+	}
+	
+	
+	
+	
 
 }

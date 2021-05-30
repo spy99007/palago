@@ -5,10 +5,17 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Hashtable;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -29,6 +36,12 @@ public class JoinFrame extends JFrame {
 	
 	Hashtable <String,User> userTable =new Hashtable<>();
 	
+	ObjectOutputStream out;
+	//ObjectInputStream in; 
+	OutputStreamWriter outOut;
+	
+	FileOutputStream fout;
+	//FileInputStream fin;
 	
 	
 	public JoinFrame() {
@@ -101,17 +114,35 @@ public class JoinFrame extends JFrame {
 			} });
 		  //리셋버튼 이벤트처리
 		
-		btReset.addActionListener(new ActionListener() { 
+		btJoin.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) { 
-				//Join(); 
-				} 
-			});
+				join();
+				
+			
+			} 
+		});
 		
-		//123123123213123
+		btOverlap.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				if(tfId.getText().equals("")) {
+					JOptionPane.showMessageDialog(p2, "아이디를 입력하세요.");
+					return;
+				}
+				
+				Boolean idCheckResult=idCheck(tfId.getText());
+				
+				if(!idCheckResult) {
+					JOptionPane.showMessageDialog(p2, "이 아이디는 사용할 수 있습니다.");
+				}else {
+					JOptionPane.showMessageDialog(p2, "아이디가 중복됩니다.");
+				}
+				
+			} });
 		
 		
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.dispose();
 	}//생성자------
 	
 	public void Reset() {
@@ -124,14 +155,56 @@ public class JoinFrame extends JFrame {
 		tfId.requestFocus();
 	}
 	
-	public void Join() {
+	public void join() {
+		
 		String id=tfId.getText();
 		String nickName=tfNickName.getText();
+		
 		char[] ch =tfPwd.getPassword();
 		String pwd=new String(ch);
+		
 		String tel = tfTel.getText();
 		String email=tfEmail.getText();
 		
+		User user = new User(id, pwd, email, tel, nickName);
+		
+		userTable.put(id, user);
+		
+		saveFile("src/files/user.txt");
+		
+		setTitle("저장완료"+userTable.size()+"명");
+		
+		dispose();
+		
+	}
+	
+	
+	public boolean idCheck(String id) {
+		
+		return userTable.containsKey(id);
+		
+	}
+	
+	
+	
+	
+	public void saveFile(String fileName) {
+		try {
+			fout = new FileOutputStream(fileName);
+			out = new ObjectOutputStream(fout);
+			
+			out.writeUTF("UTF-8");
+			out.writeObject(userTable);
+			out.flush(); 
+			out.close();
+			
+			fout.close();
+
+			System.out.println(fileName+"저장되었습니다.");
+		}catch(IOException e) {
+			System.out.println("오류가 발생했습니다. : "+e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {

@@ -12,6 +12,7 @@ public class LoginFrame extends JFrame {
 	JButton btJoin,btFind,btLogin;
 	JTextField tfId;
 	JPasswordField tfPwd;
+	JoinFrame joinF;
 	public LoginFrame() {
 		
 		super("::LoginFrame::");
@@ -49,8 +50,24 @@ public class LoginFrame extends JFrame {
 		tfId.setBorder(new TitledBorder("아이디"));
 		tfPwd.setBorder(new TitledBorder("비밀번호"));
 
+		btLogin.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				
+			
+			} 
+		});
 		
-		
+		btJoin.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				Object obj = e.getSource();
+				JoinFrame joinF = new JoinFrame();
+				if(obj==btJoin) {
+					joinF.pack();
+					joinF.setSize(500, 600);
+					joinF.setVisible(true);
+				}
+			} 
+		});
 		
 		
 		
@@ -59,7 +76,45 @@ public class LoginFrame extends JFrame {
 	}//생성자------
 	
 	
-	 
+	 public void login() {
+		 String id = tfId.getText();
+		 char[] ch = tfPwd.getPassword();
+		 String pwd =new String(ch);
+		 
+		 if(id==null||pwd==null||id.trim().equals("")||pwd.trim().equals("")) {
+			 JOptionPane.showMessageDialog(pC,"아이디를 입력력하세요");
+			 return;
+		 }
+		 id=id.trim();
+		 pwd=pwd.trim();
+		 
+		 //null체크 
+		 
+		 boolean isExist = joinF.userTable.containsKey(id);
+		 
+		 if(!isExist) {
+			 JOptionPane.showMessageDialog(pC,"해당하는 아이디가 없습니다.");
+			 tfId.setText("");
+			 tfPwd.setText("");
+			 tfId.requestFocus();
+			 return;
+		 }//아이디 체크
+		 
+		 User tmpUser = joinF.userTable.get(id);
+		 String tmpPwd= tmpUser.getPwd();
+		 if(!pwd.equals(tmpPwd)) {
+			 JOptionPane.showMessageDialog(pC,"비밀번호가 틀렸습니다.");
+			 tfId.setText("");
+			 tfPwd.setText("");
+			 tfId.requestFocus();
+			 return;
+		 }
+		 
+		 JOptionPane.showMessageDialog(pC,"로그인 되었습니다.");
+		 
+		 
+		 
+	 }
 	
 	
 	public static void main(String[] args) {

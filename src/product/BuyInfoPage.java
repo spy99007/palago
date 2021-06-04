@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class BuyInfoPage extends JPanel {
 
@@ -12,36 +13,41 @@ public class BuyInfoPage extends JPanel {
 	
 	JLabel pimage;
 	JTextArea pinfo;
-	
 	JButton before,next;
+	JFileChooser chooser=new JFileChooser();
+	FileNameExtensionFilter filter
+	=new FileNameExtensionFilter("JPG&PNG Images", "jpg","png");
 	
-	BuyMainFrame buyF;
+	BuyMainFrame buyF; 
 
 	public BuyInfoPage(BuyMainFrame buy) {
 		this.buyF=buy;
-		buyF.whiteback(this);
+		chooser.setFileFilter(filter);
+		this.setBackground(Color.white);
 		setLayout(new BorderLayout());
 		add(pC,"Center");	add(pS,"South");
 		
-		buyF.whiteback(pC);
-		buyF.whiteback(pS);
+		//Å¸ÀÌÆ²,¹è°æ ¼³Á¤
+		buyF.myborder(pC,"»óÇ° Á¤º¸");
+		pS.setBackground(Color.white);
 		
-		buyF.pborder(pC, "ìƒí’ˆì •ë³´");
-		pimage=new JLabel(new ImageIcon("images/picicon1.png"));
-		pinfo=new JTextArea("ìƒí’ˆ ì„¤ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
-		pinfo.setForeground(Color.LIGHT_GRAY);
-		pinfo.setBorder(new TitledBorder(""));
+		//»óÇ° »çÁø, ¼³¸í Ãß°¡
+		pimage=new JLabel("¿©±â¸¦ Å¬¸¯ÇÏ¿© »çÁøÀ» ¼±ÅÃÇÏ¼¼¿ä");
+		pinfo=new JTextArea("»óÇ° ¼³¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		pimage.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,14));
+		buyF.mytext(pinfo);
+		pC.add(pimage,"North");	 
+		pC.add(new JScrollPane(pinfo),"Center");
 		
-		pC.add(pimage,"North");	
-		pC.add(pinfo,"Center");
-		
-		before=new JButton("ì´ì „");
-		next=new JButton("ë“±ë¡í•˜ê¸°");
-		
+		//ÇÏ´Ü ¹öÆ°
+		before=new JButton("ÀÌÀü");
+		next=new JButton("µî·ÏÇÏ±â");
+		buyF.myFont(before, 14);
+		buyF.myFont(next, 14);
 		pS.add(before);	pS.add(next);
 
 	
-	}//ìƒì„±ì------
+	}//»ı¼ºÀÚ------
 
 	@Override
 	public Insets getInsets() {

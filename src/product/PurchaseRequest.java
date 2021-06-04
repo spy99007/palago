@@ -15,7 +15,7 @@ public class PurchaseRequest extends JFrame {
 	private JPanel contentPane;
 
 	public PurchaseRequest() {
-		setTitle("êµ¬ë§¤ìš”ì²­ ìƒí’ˆ");
+		setTitle("±¸¸Å¿äÃ» »óÇ°");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -25,8 +25,8 @@ public class PurchaseRequest extends JFrame {
 		
 		
 		
-		// êµ¬ë§¤ìš”ì²­ ìƒí’ˆ - êµ¬ë§¤ë‚´ì—­ ë’¤ë¡œê°€ê¸° ë²„íŠ¼ (êµ¬ë§¤ê´€ë¦¬(PurchaseTab.java)ë¡œ íŒ¨ë„ ì „í™˜)
-		JButton prbtn1 = new JButton("ë’¤ë¡œê°€ê¸°");
+		// ±¸¸Å¿äÃ» »óÇ° - ±¸¸Å³»¿ª µÚ·Î°¡±â ¹öÆ° (±¸¸Å°ü¸®(PurchaseTab.java)·Î ÆĞ³Î ÀüÈ¯)
+		JButton prbtn1 = new JButton("µÚ·Î°¡±â");
 		prbtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

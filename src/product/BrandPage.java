@@ -18,36 +18,44 @@ public class BrandPage extends JPanel {
 	JTextField btf;
 	JButton before,next;
 	JList<String> brandList;
-	
 
 	SellMainFrame sellF;
 	
 	public BrandPage(SellMainFrame rgst) {
 		this.sellF=rgst;
-
-		
 		setBackground(Color.white);
 		setLayout(new BorderLayout());
-		pN.setBackground(Color.white);
+		
+		//Å¸ÀÌÆ²,¹è°æ»ö ¼³Á¤		
+		sellF.myborder(pN, "ºê·£µå");
 		pC.setBackground(Color.white);
 		pS.setBackground(Color.white);
 		
 		add(pN,"North");	add(pC,"Center");	add(pS,"South");
 		
-		btf=new JTextField("ì˜ˆ)ìŠ¤íƒ€ë²…ìŠ¤,ë°°ìŠ¤í‚¨ë¼ë¹ˆìŠ¤ ë“±",38);
+		//»ç¿ëÀÚ ÀÔ·Â Ä­
+		btf=new JTextField("¿¹)½ºÅ¸¹÷½º,¹è½ºÅ²¶óºó½º µî",35);
 		pN.add(btf);
-		pN.setBorder(new TitledBorder("ë¸Œëœë“œ"));
-		btf.setForeground(Color.LIGHT_GRAY);
+		sellF.settext(btf);
 		
-		before=new JButton("ì´ì „");
-		next=new JButton("ë‹¤ìŒ");
+		//ÀÌÀü,´ÙÀ½ ¹öÆ° ¼³Á¤
+		before=new JButton("ÀÌÀü");
+		next=new JButton("´ÙÀ½");
+		sellF.myFont(before, 14);
+		sellF.myFont(next, 14);
 		pS.add(before);	pS.add(next);
 		
-		brandList=new JList<>();
+		//Áß¾Ó ºê·£µå ¸®½ºÆ®
+		brandList=new JList<>(sellF.brandArr);
+		brandList.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
 		pC.add(brandList);
+		brandList.setFixedCellHeight(25);
+		brandList.setFixedCellWidth(400);
+	
 
 	
-	}//ìƒì„±ì------
+	}//»ı¼ºÀÚ------
+	
 	
 	@Override
 	public Insets getInsets() {

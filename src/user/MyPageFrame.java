@@ -3,16 +3,22 @@ package user;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.Hashtable;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import common.Common;
+import product.MainA;
 
 
 
@@ -24,21 +30,39 @@ public class MyPageFrame extends JFrame {
 	
 	JPanel pS = new JPanel();
 	
-	JTextField tfId,tfEmail,tfTel,tfNickName;
-	JPasswordField tfPwd;
-	JButton btChgPwd;
-	JoinFrame joinF;
-	Hashtable <String,User> userTable = new Hashtable<>();
+	public JTextField tfId,tfEmail,tfTel,tfNickName;
+	public JPasswordField tfPwd;
+	public JButton btChgPwd;
+	public JButton btDelete;
+	public JoinFrame joinF;
 	ObjectInputStream in;
 	FileInputStream fin;
-	LoginFrame loginF;
+	LoginFrame lgF;
+	MainA ma;
+	
+	String id;
+	
+	Common com;
+	Hashtable <String,Object> userTable;
 	
 	
-	public MyPageFrame() {
-		super("::MyPageFrame::");
+	public MainA getMainA() {
+		return ma;
+	}
+	
+	public void setMainA(MainA ma) {
+		this.ma =ma;
+	}
+	
+	
+	public MyPageFrame(MainA ma) { 
+		//super("::MyPageFrame::");
+		
 		Container cp = this.getContentPane();
 		
-		readFile("src/files/user.txt");
+		
+		String id = this.id;
+		
 		
 		cp.add(p, "Center");
 		p.setBackground(Color.white);
@@ -58,7 +82,8 @@ public class MyPageFrame extends JFrame {
 		tfTel=new JTextField();
 		tfNickName=new JTextField();
 		tfPwd=new JPasswordField();
-		btChgPwd=new JButton("ë¹„ë°€ë²ˆí˜¸ë³€ê²½");
+		btChgPwd=new JButton("ºñ¹Ğ¹øÈ£º¯°æ");
+		btDelete=new JButton("È¸¿øÅ»Åğ");
 		
 		p2.add(tfId);
 		p2.add(tfNickName);
@@ -66,79 +91,99 @@ public class MyPageFrame extends JFrame {
 		p2.add(tfTel);
 		p2.add(tfEmail);
 		p2.add(btChgPwd);
+		p2.add(btDelete);
 		tfId.setBounds(125,50,200,40);
 		
 		btChgPwd.setBounds(350,165,120,20);
+		btDelete.setBounds(170,350,100,20);
 		
 		tfNickName.setBounds(125,100,200,40);
 		tfPwd.setBounds(125,150,200,40);
-		tfTel.setBounds(125,300,200,40);
-		tfEmail.setBounds(125,350,200,40);
-		
-		
-		tfId.setBorder(new TitledBorder("ì•„ì´ë””"));
-		tfNickName.setBorder(new TitledBorder("ë‹‰ë„¤ì„"));
-		tfPwd.setBorder(new TitledBorder("ë¹„ë°€ë²ˆí˜¸"));
-		tfTel.setBorder(new TitledBorder("ì „í™”ë²ˆí˜¸"));
-		tfEmail.setBorder(new TitledBorder("ì´ë©”ì¼"));
+		tfTel.setBounds(125,200,200,40);
+		tfEmail.setBounds(125,250,200,40);
 		
 		
 		
 		
+		tfId.setBorder(new TitledBorder("¾ÆÀÌµğ"));
+		tfNickName.setBorder(new TitledBorder("´Ğ³×ÀÓ"));
+		tfPwd.setBorder(new TitledBorder("ºñ¹Ğ¹øÈ£"));
+		tfTel.setBorder(new TitledBorder("ÀüÈ­¹øÈ£"));
+		tfEmail.setBorder(new TitledBorder("ÀÌ¸ŞÀÏ"));
+		
+		//lgF=new LoginFrame();
+		this.ma=ma;
 		
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}//ìƒì„±ì------
+		btChgPwd.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				Object obj = e.getSource();
+				if(obj==btChgPwd) {
+					changePwd();
+					JOptionPane.showMessageDialog(p2,"ºñ¹Ğ¹øÈ£º¯°æ ¼º°ø!.");
+					dispose();
+					return;
+				}
+			} 
+		});
+		
+		btDelete.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				Object obj = e.getSource();
+				if(obj==btDelete) {
+					deleteUser();
+					JOptionPane.showMessageDialog(p2,"È¸¿øÅ»Åğ¸¦ ¼º°øÇÏ¿´½À´Ï´Ù.");
+					
+					return;
+				}
+			} 
+		});
+		
+		
+		dispose();
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}//»ı¼ºÀÚ------
 	
 	public static void main(String[] args) {
-		MyPageFrame my = new MyPageFrame();
-		my.setSize(500, 600);
-		my.setVisible(true);
+		//MyPageFrame my = new MyPageFrame();
+		//my.setSize(500, 600);
+		//my.setVisible(true);
 	}
 	
-	/*ë§ˆì´í˜ì´ì§€ íšŒì›ì •ë³´ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ” ë©”ì†Œë“œ*/
-	public void readFile(String fileName) {
-	   try {  
-		   	fin = new FileInputStream(fileName);
-		   	in = new ObjectInputStream(fin);
-//		   	in.defaultReadObject();
-		   	Object o = in.readObject();
-		   	userTable = (Hashtable<String,User>)o;
-		   	
-		   	
-		   	
-		   	System.out.println(userTable.get("id"));
-		   	
-		   	
-		   	
-//		   	System.out.println(userTable);
-		   	
-		   	System.out.println(fileName+"ë¡œë“œë˜ì—ˆìŠµë‹ˆë‹¤.");
-		   	
-//		   	//tfId.setText();
-////		   	tfId.setText();
-//		   	tfNickName.setText("");
-//		   	char[] ch= tfPwd.getPassword();
-//		   	String pwd=new String(ch);
-//		   	tfPwd.setText(pwd);
-//		   	tfTel.setText("");
-//		   	tfEmail.setText("");
-//		   	
-		   	
-	   	   }catch(Exception e) {
-	   		   System.out.println("íŒŒì¼ ë¶ˆëŸ¬ì˜¤ëŠ” ì¤‘ ì˜¤ë¥˜ "+e.getMessage());
-	   		   e.printStackTrace();
-	   	   }
-	   	
-	   	   
-	   
-	   		
-	     
-	     
+	public void changePwd() {
+		String id =tfId.getText();
+		String email=tfEmail.getText();
+		String NickNameString=tfNickName.getText();
+		String Tel = tfTel.getText();
+		
+		User user= ma.getCom().getUser(id);
+		System.out.println("user.id"+user.getId());
+		System.out.println("user.email"+user.getEmail());
+		char[] ch=tfPwd.getPassword();
+		String pwd =new String(ch);
+		user.setPwd(pwd);
+		this.userTable=ma.getLgF().joinF.userTable;
+		this.userTable.put(id, user);
+		System.out.println("ma.getLgF().joinF.userTable.size(): "+ma.getLgF().joinF.userTable.size());
+		ma.getCom().saveFile("src/files/user.txt", userTable);
+		
 	}
 	
+	public void deleteUser() {
+		
+		String id= tfId.getText();
+		
+		User user= ma.getCom().getUser(id);
+		
+		this.userTable=ma.getLgF().joinF.userTable;
+		System.out.println(this.userTable);
+		this.userTable.remove(id);
+		ma.getCom().saveFile("src/files/user.txt", userTable);
+		
+		
+	}
+	public void setId(String id) {
+		this.id =id;
+	}
 	
-	
-	
-
 }

@@ -1,4 +1,5 @@
 package product;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -8,54 +9,60 @@ public class SalesHistoryTab extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tf;
+	private JTextArea ta;
 
 	public SalesHistoryTab() {
-		setTitle("ÌåêÎß§Í¥ÄÎ¶¨");
+		setTitle("∆«∏≈∞¸∏Æ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel shlb = new JLabel("ÌåêÎß§ÎÇ¥Ïó≠");
+		contentPane.setBackground(Color.white);
+
+		JLabel shlb = new JLabel("∆«∏≈≥ªø™");
 		shlb.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		shlb.setBounds(70, 35, 61, 16);
+		shlb.setBounds(70, 37, 61, 16);
 		contentPane.add(shlb);
-		
-		tf = new JTextField();
-		tf.setBounds(140, 30, 250, 30);
-		contentPane.add(tf);
+
+		tf = new JTextField("ªÛ«∞ ¿Ã∏ß¿ª ∞Àªˆ«ÿ¡÷ººø‰!");
+		tf.setForeground(Color.LIGHT_GRAY);
+		tf.setBounds(130, 30, 250, 30);
 		tf.setColumns(10);
-		
-		JButton shbtn1 = new JButton("Í≤ÄÏÉâ");
+		contentPane.add(tf);
+
+		JButton shbtn1 = new JButton("∞Àªˆ");
 		shbtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
-		shbtn1.setBounds(390, 30, 50, 30);
+		shbtn1.setBounds(385, 30, 50, 30);
 		contentPane.add(shbtn1);
-		
-		
-		JButton shbtn = new JButton("Îí§Î°úÍ∞ÄÍ∏∞");
+
+		ta = new JTextArea();
+		contentPane.add(ta);
+		ta.setBounds(70, 80, 360, 300);
+		ta.setVisible(true);
+
+		//µ⁄∑Œ∞°±‚ πˆ∆∞ 
+		JButton shbtn = new JButton();
+		shbtn.setIcon(new ImageIcon("./images/back.png"));
+		shbtn.setSelectedIcon(new ImageIcon("./images/back.png"));
 		shbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				SellTab st = new SellTab();
-				st.setSize(500,500);
-				st.setVisible(true);
+				Menu menu = new Menu();
+				
 			}
 		});
-		shbtn.setBounds(50, 385, 115, 30);
+		shbtn.setBounds(10,10,30,30);
 		contentPane.add(shbtn);
 	}
-		
-		
-	
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -67,7 +74,7 @@ public class SalesHistoryTab extends JFrame {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			
+
 			}
 		});
 	}

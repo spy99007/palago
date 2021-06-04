@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.table.DefaultTableModel;
 
 public class ProductPage extends JPanel {
 
@@ -13,12 +14,12 @@ public class ProductPage extends JPanel {
 	
 	JTextField ptf;
 	JButton before,next;
+	JList<String> productList;
 
 	SellMainFrame sellF;
 
 	public ProductPage(SellMainFrame rgst) {
 		this.sellF=rgst;
-		
 		setBackground(Color.white);
 		setLayout(new BorderLayout());
 		
@@ -27,18 +28,29 @@ public class ProductPage extends JPanel {
 		pC.setBackground(Color.white);
 		pS.setBackground(Color.white);
 		
-		ptf=new JTextField("ìƒí’ˆëª…ì„ ì…ë ¥í•˜ì„¸ìš”",38);
+		//Å¸ÀÌÆ², »ç¿ëÀÚ ÀÔ·ÂÄ­ 
+		sellF.myborder(pN, "»óÇ°¸í");
+		ptf=new JTextField("»óÇ°¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä",35);
 		pN.add(ptf);
-		pN.setBorder(new TitledBorder("ìƒí’ˆëª…"));
-		ptf.setForeground(Color.LIGHT_GRAY);
+		sellF.settext(ptf);
 		
-		before=new JButton("ì´ì „");
-		next=new JButton("ë‹¤ìŒ");
+		//»óÇ° ¸®½ºÆ®
+		productList=new JList<String> (sellF.productArr);
+		productList.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
+		pC.add(productList);
+		productList.setFixedCellHeight(30);
+		productList.setFixedCellWidth(400);
+		
+		//ÀÌÀü, ´ÙÀ½ ¹öÆ°
+		before=new JButton("ÀÌÀü");
+		next=new JButton("´ÙÀ½");
 		pS.add(before);
 		pS.add(next);
-
+		sellF.myFont(before, 14);
+		sellF.myFont(next, 14);
+ 
 	
-	}//ìƒì„±ì------
+	}//»ı¼ºÀÚ------
 
 	
 	@Override

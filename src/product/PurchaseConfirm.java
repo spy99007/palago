@@ -11,7 +11,7 @@ public class PurchaseConfirm extends JFrame {
 
 	
 	public PurchaseConfirm() {
-		setTitle("êµ¬ë§¤í•˜ê¸°");
+		setTitle("±¸¸ÅÇÏ±â");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -20,11 +20,11 @@ public class PurchaseConfirm extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		JButton pcfbtn1 = new JButton("êµ¬ë§¤í•˜ê¸°");
+		JButton pcfbtn1 = new JButton("±¸¸ÅÇÏ±â");
 		pcfbtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showConfirmDialog(null, "êµ¬ë§¤í•˜ì‹œê² ìŠµë‹ˆê¹Œ?", "êµ¬ë§¤í•˜ê¸°", JOptionPane.YES_NO_CANCEL_OPTION);
+				JOptionPane.showConfirmDialog(null, "±¸¸ÅÇÏ½Ã°Ú½À´Ï±î?", "±¸¸ÅÇÏ±â", JOptionPane.YES_NO_CANCEL_OPTION);
 				dispose();
 				PurchaseTab pt = new PurchaseTab();
 				pt.setSize(500,500);
@@ -37,7 +37,7 @@ public class PurchaseConfirm extends JFrame {
 		
 		
 		
-		JButton pcfbtn2 = new JButton("ë’¤ë¡œê°€ê¸°");
+		JButton pcfbtn2 = new JButton("µÚ·Î°¡±â");
 		pcfbtn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -4,76 +4,97 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
 public class DetailPage extends JPanel{
 
 	JPanel p=new JPanel(new GridLayout(2,0,10,10));
 	JPanel pS=new JPanel(new BorderLayout());
 	JPanel p1 = new JPanel(new GridLayout(2,1,10,10));
-	JPanel p2 = new JPanel(new GridLayout(2,1,10,10));
+	JPanel p2 = new JPanel(new GridLayout(2,3,10,10));
 	JPanel p3 = new JPanel(new BorderLayout());
-	JPanel p4 = new JPanel();
-	JPanel p5 = new JPanel(new GridLayout(1,2,10,10));
+	JPanel p4 = new JPanel(new GridLayout(1,2,10,10));
 	
-	JLabel pname,pimage,pricenm1,pricenm2;
-	JComboBox<String> pcategory;
+	JLabel pname,pimage,pricenm1,pricenm2,won1,won2;
+	JComboBox<String> pcategory; 
 	JTextField price1,price2;
 	JTextArea pinfo;
-	JButton pin,before,fin;
+	JButton before,fin;
 	
 	SellMainFrame sellF;
 	
-	TitledBorder title;
+	CardLayout card;
 	
+	//ÆÄÀÏ¾÷·Îµå Ã¢
+	JFileChooser chooser=new JFileChooser();
+	FileNameExtensionFilter filter
+	=new FileNameExtensionFilter("JPG & PNG images", "jpg", "png");
+			
 	public DetailPage(SellMainFrame rgst) {
 		this.sellF=rgst;
+		chooser.setFileFilter(filter);
 		
+		//panel¹è°æ¼³Á¤,add
 		setBackground(Color.white);
 		setLayout(new BorderLayout());
 		p.setBackground(Color.white);
 		pS.setBackground(Color.white);
-//		add(new JScrollPane(p));
 		add(p,"North"); add(pS,"South");
 		p.add(p1);	p.add(p2);	
-		add(p3,"Center");
-		pS.add(p4);	pS.add(p5,"South");	
+		pS.add(p3,"Center");
+		pS.add(p4,"South");	
 		
-		p1.setBorder(new TitledBorder("íŒë§¤ìƒí’ˆ"));
-		p1.setBackground(Color.white);
+		//ÆÇ¸Å»óÇ° ¼±ÅÃ
+		sellF.myborder(p1, "ÆÇ¸Å»óÇ°");
 		pname=new JLabel();
-		pcategory=new JComboBox<>();
-		p1.add(pname);	p1.add(pcategory);
+		pcategory=new JComboBox<String>(sellF.cateArr);
+		pcategory.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
+		pname.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
+		sellF.setmargin(pname);
+		p1.add(pname,"North");	
+		p1.add(pcategory);
+		 
+		//°¡°İÁ¤º¸ ÀÔ·Â
+		sellF.myborder(p2, "°¡°İÁ¤º¸");
+		pricenm1=new JLabel("¼ÒºñÀÚ°¡");
+		pricenm2=new JLabel("ÆÇ¸Å°¡");
+		sellF.setmargin(pricenm1);
+		sellF.setmargin(pricenm2);
+		pricenm1.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
+		pricenm2.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
+		price1=new JTextField("±İ¾× ÀÔ·Â");
+		price2=new JTextField("±İ¾× ÀÔ·Â");
+		price1.setHorizontalAlignment(JTextField.RIGHT);
+		price2.setHorizontalAlignment(JTextField.RIGHT);
+		sellF.settext(price1);
+		sellF.settext(price2);
+		won1=new JLabel("¿ø");
+		won2=new JLabel("¿ø");
+		won1.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
+		won2.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
+		p2.add(pricenm1);p2.add(price1);p2.add(won1);	
+		p2.add(pricenm2);p2.add(price2);p2.add(won2);
 		
-		p2.setBackground(Color.white);
-		p2.setBorder(new TitledBorder("ê°€ê²©ì •ë³´"));
-		pricenm1=new JLabel("ì†Œë¹„ìê°€");
-		pricenm2=new JLabel("íŒë§¤ê°€");		
-		price1=new JTextField("ê¸ˆì•¡ ì…ë ¥");
-		price2=new JTextField("ê¸ˆì•¡ ì…ë ¥");
-		price1.setForeground(Color.LIGHT_GRAY);
-		price2.setForeground(Color.LIGHT_GRAY);		
-		p2.add(pricenm1);p2.add(price1);	
-		p2.add(pricenm2);p2.add(price2);
+		//»óÇ° Á¤º¸,»çÁø ¾÷·Îµå
+		sellF.myborder(p3, "»óÇ°Á¤º¸");
+		pimage=new JLabel("»çÁø¼±ÅÃ");
+		pimage.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
+		pinfo=new JTextArea(">>»óÇ° ¼³¸í",6,25);
+		p3.add(pimage,"West");	p3.add(pinfo);
+		sellF.settext(pinfo);
 		
-		p3.setBackground(Color.white);
-		p3.setBorder(new TitledBorder("ìƒí’ˆì •ë³´"));
-		pimage=new JLabel(new ImageIcon("images/picicon1.png"));
-		pinfo=new JTextArea(10,10);
-		p3.add(pimage,"North");	p3.add(pinfo);
-		pinfo.setBorder(new TitledBorder(""));
-		
+		//ÀÌÀü,´ÙÀ½ ¹öÆ°
 		p4.setBackground(Color.white);
-		p4.setBorder(new TitledBorder("PIN(ì¿ í°ë²ˆí˜¸)"));
-		pin=new JButton("+ ì¿ í° ì¶”ê°€");
-		p4.add(pin);
+		before=new JButton("ÀÌÀü");
+		fin=new JButton("µî·ÏÇÏ±â");
+		p4.add(before);	p4.add(fin);
+		sellF.myFont(before, 14);
+		sellF.myFont(fin, 14);
 		
-		p5.setBackground(Color.white);
-		before=new JButton("ì´ì „");
-		fin=new JButton("ë“±ë¡í•˜ê¸°");
-		p5.add(before);	p5.add(fin);
-
-	
-	}//ìƒì„±ì------
+		
+	}//»ı¼ºÀÚ------
 	
 	
 	

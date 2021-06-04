@@ -7,70 +7,55 @@ import javax.swing.border.*;
 
 public class BuyProductPage extends JPanel {
 
+	JPanel p = new JPanel(new GridLayout(2,0,10,10));
 	JPanel p1 = new JPanel(new BorderLayout());
 	JPanel p2 = new JPanel(new BorderLayout());
-	JPanel p2N = new JPanel(new GridLayout(0,2,10,10));
-	JPanel p2S=new JPanel(card=new CardLayout());
-	JPanel p2rate=new JPanel(new FlowLayout());
 	JPanel pS = new JPanel(new GridLayout(1,0,10,10));
 	
 	
 	JComboBox<String> category;
-	JTextField pname,min,max,price;
-	JButton rate,won,next;
-	JLabel lb;
-	
+	JTextField pname,price;
+	JButton next;
+	JLabel won;
 	CardLayout card;
 	BuyMainFrame buyF;
 	
 
 	public BuyProductPage(BuyMainFrame buy) {
 		this.buyF=buy;
-		buyF.whiteback(this);
+		this.setBackground(Color.white);
 		setLayout(new BorderLayout());
+		add(p);
 		add(pS,"South");
-		add(p1,"North");	add(p2,"Center");
-		p2.add(p2N);	p2.add(p2rate);
+		p.add(p1);	
+		p.add(p2);	
+		p.setBackground(Color.white);
+		pS.setBackground(Color.white);
 		
-		
-		buyF.whiteback(p1);
-		buyF.whiteback(p2); buyF.whiteback(p2N);
-		buyF.whiteback(p2rate);	buyF.whiteback(p2S);
-		buyF.whiteback(pS);
-		
-		buyF.pborder(p1,"ìƒí’ˆì •ë³´");
-		category=new JComboBox<>();
-		pname=new JTextField("ìƒí’ˆëª…ì„ ì…ë ¥í•˜ì„¸ìš”");
-		pname.setForeground(Color.LIGHT_GRAY);
+		//»óÇ°Á¤º¸ ÀÔ·Â
+		buyF.myborder(p1,"»óÇ°Á¤º¸");
+		category=new JComboBox<>(buyF.cateArr);
+		category.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,12));
+		pname=new JTextField("»óÇ°¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+		buyF.mytext(pname);
 		p1.add(category,"North");	p1.add(pname);
 		
-		buyF.pborder(p2,"ë§¤ì…ê¸°ì¤€");
-		rate=new JButton("í• ì¸ë¥ (%)");
-		won=new JButton("ê¸ˆì•¡(ì›)");
-		p2.add(p2N,"North");
-		p2N.add(rate);	p2N.add(won);
-		p2.add(p2S,"Center"); 
-		
-		min=new JTextField("ìµœì†Œ(%)",15);
-		max=new JTextField("ìµœëŒ€(%)",15);
-		min.setForeground(Color.LIGHT_GRAY);
-		max.setForeground(Color.LIGHT_GRAY);
-		lb=new JLabel("~");
-		p2rate.add(min);	p2rate.add(lb);		p2rate.add(max);
-		price=new JTextField("ë§¤ì… ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”",38);
-		price.setForeground(Color.LIGHT_GRAY);
+		//¸ÅÀÔ±âÁØ °¡°İ ÀÔ·Â
+		buyF.myborder(p2,"¸ÅÀÔ±âÁØ");
+		price=new JTextField("¸ÅÀÔ ±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä");
+		buyF.mytext(price);
+		won=new JLabel("  ¿ø");
+		won.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,14)); 
+		p2.add(price,"West");
+		p2.add(won);
 
-		p2S.add("rate",p2rate);
-		p2S.add("price",price);
-
-		
-		
-		
-		next=new JButton("ë‹¤ìŒ");
+		//ÇÏ´Ü ¹öÆ°
+		next=new JButton("´ÙÀ½");
+		buyF.myFont(next, 14);
 		pS.add(next);	
 
 	
-	}//ìƒì„±ì------
+	}//»ı¼ºÀÚ------
 
 
 	@Override

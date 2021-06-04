@@ -21,7 +21,7 @@ public class SellReport extends JFrame {
 	private JTextField tf;
 
 	public SellReport() {
-		setTitle("ì‹ ê³ í•˜ê¸°");
+		setTitle("½Å°íÇÏ±â");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -30,8 +30,8 @@ public class SellReport extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		// ì‹ ê³ í•˜ê¸° - ì‹ ê³ í•  Username Label, textField
-		JLabel rplb1 = new JLabel("ì‹ ê³  Username");
+		// ½Å°íÇÏ±â - ½Å°íÇÒ Username Label, textField
+		JLabel rplb1 = new JLabel("½Å°í Username");
 		rplb1.setBounds(20, 35, 95, 15);
 		contentPane.add(rplb1);
 		
@@ -41,8 +41,8 @@ public class SellReport extends JFrame {
 		tf.setColumns(10);
 		
 		
-		// ì‹ ê³ í•˜ê¸° - ì‹ ê³  ì‚¬ìœ  Label, textArea
-		JLabel rplb2 = new JLabel("ì‹ ê³  ì‚¬ìœ ");
+		// ½Å°íÇÏ±â - ½Å°í »çÀ¯ Label, textArea
+		JLabel rplb2 = new JLabel("½Å°í »çÀ¯");
 		rplb2.setBounds(55, 105, 60, 15);
 		contentPane.add(rplb2);
 		
@@ -52,11 +52,11 @@ public class SellReport extends JFrame {
 		
 		
 		
-		// ì‹ ê³ í•˜ê¸° - ì‹ ê³  ì ‘ìˆ˜í•˜ê¸° ë²„íŠ¼ 
-		JButton rpbtn1 = new JButton("ì‹ ê³  ì ‘ìˆ˜í•˜ê¸°");
+		// ½Å°íÇÏ±â - ½Å°í Á¢¼öÇÏ±â ¹öÆ° 
+		JButton rpbtn1 = new JButton("½Å°í Á¢¼öÇÏ±â");
 		rpbtn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "ì ‘ìˆ˜ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.", "ì‹ ê³  ì ‘ìˆ˜",JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Á¢¼ö°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.", "½Å°í Á¢¼ö",JOptionPane.PLAIN_MESSAGE);
 				dispose();
 				SellTab pt = new SellTab();
 				pt.setSize(500,500);
@@ -67,8 +67,8 @@ public class SellReport extends JFrame {
 		contentPane.add(rpbtn1);
 		
 		
-		// ì‹ ê³ í•˜ê¸° - ë’¤ë¡œê°€ê¸° ë²„íŠ¼ (
-		JButton rpbtn2 = new JButton("ë’¤ë¡œê°€ê¸°");
+		// ½Å°íÇÏ±â - µÚ·Î°¡±â ¹öÆ° (
+		JButton rpbtn2 = new JButton("µÚ·Î°¡±â");
 		rpbtn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

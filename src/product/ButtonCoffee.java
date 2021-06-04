@@ -4,76 +4,128 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ButtonCoffee extends JFrame {
+public class ButtonCoffee extends JPanel {
 
 	JPanel p = new JPanel();
 	JPanel pn = new JPanel();
-
-
-	public ButtonCoffee() {
-		super("::ButtonCoffee::");
-		Container cp = this.getContentPane();
+	MainA ma;
+	JButton btnb;
+	JButton btn1, btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9;
+	public ButtonCoffee(MainA ma) {
+		this.ma=ma;
+		
+		Container cp = this;
+		cp.setLayout(new BorderLayout());
 		cp.add(p, "Center");
 		cp.add(pn,"North");
 		p.setBackground(Color.white);
-		p.setLayout(new GridLayout(2,3,5,5));
+		p.setLayout(new GridLayout(3,3,5,5));
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
+		  
 		
 		ImageIcon Icon1= new ImageIcon("images/starbucks.PNG");
-		JButton btn1 =new JButton("Ïä§ÌÉÄÎ≤ÖÏä§",Icon1);
+		 btn1 =new JButton("Ω∫≈∏π˜Ω∫",Icon1);
 		p.add(btn1);
 		btn1.setHorizontalTextPosition(JButton.CENTER);
 		btn1.setVerticalTextPosition(JButton.BOTTOM);
+		btn1.setBackground(Color.white);
 		
 		ImageIcon Icon2= new ImageIcon("images/twosome.PNG");
-		JButton btn2 =new JButton("Ìà¨Ïç∏ÌîåÎ†àÏù¥Ïä§",Icon2);
+		 btn2 =new JButton("≈ıΩÊ«√∑π¿ÃΩ∫",Icon2);
 		p.add(btn2);
 		btn2.setHorizontalTextPosition(JButton.CENTER);
 		btn2.setVerticalTextPosition(JButton.BOTTOM);
+		btn2.setBackground(Color.white);
 		
 		ImageIcon Icon3= new ImageIcon("images/ediya.PNG");
-		JButton btn3 =new JButton("Ïù¥ÎîîÏïº",Icon3);
+		 btn3 =new JButton("¿Ãµæﬂ",Icon3);
 		p.add(btn3);
 		btn3.setHorizontalTextPosition(JButton.CENTER);
 		btn3.setVerticalTextPosition(JButton.BOTTOM);
+		btn3.setBackground(Color.white);
 		
 		ImageIcon Icon4= new ImageIcon("images/hollys.PNG");
-		JButton btn4 =new JButton("Ìï†Î¶¨Ïä§",Icon4);
+		 btn4 =new JButton("«“∏ÆΩ∫",Icon4);
 		p.add(btn4);
 		btn4.setHorizontalTextPosition(JButton.CENTER);
 		btn4.setVerticalTextPosition(JButton.BOTTOM);
+		btn4.setBackground(Color.white);
 		
 		ImageIcon Icon5= new ImageIcon("images/pull.PNG");
-		JButton btn5 =new JButton("ÌíÄÎ∞îÏÖã",Icon5);
+		 btn5 =new JButton("«ÆπŸº¬",Icon5);
 		p.add(btn5);
 		btn5.setHorizontalTextPosition(JButton.CENTER);
 		btn5.setVerticalTextPosition(JButton.BOTTOM);
-		
+		btn5.setBackground(Color.white);
 		
 		ImageIcon Icon6= new ImageIcon("images/tom.PNG");
-		JButton btn6 =new JButton("ÌÉêÏï§ÌÉêÏä§",Icon6);
+		 btn6 =new JButton("≈Ωæÿ≈ΩΩ∫",Icon6);
 		p.add(btn6);
 		btn6.setHorizontalTextPosition(JButton.CENTER);
 		btn6.setVerticalTextPosition(JButton.BOTTOM);
+		btn6.setBackground(Color.white);
 		
+		ImageIcon Icon7= new ImageIcon("images/gong.PNG");
+		btn7 =new JButton("∞¯¬˜",Icon7);
+		p.add(btn7);
+		btn7.setHorizontalTextPosition(JButton.CENTER);
+		btn7.setVerticalTextPosition(JButton.BOTTOM);
+		btn7.setBackground(Color.white);
 		
-		JButton btnb =new JButton("ÎèåÏïÑÍ∞ÄÍ∏∞");
+		ImageIcon Icon8= new ImageIcon("images/angel.PNG");
+		btn8 =new JButton("ø£¡¶∏Æ≥ Ω∫",Icon8);
+		p.add(btn8);
+		btn8.setHorizontalTextPosition(JButton.CENTER);
+		btn8.setVerticalTextPosition(JButton.BOTTOM);
+		btn8.setBackground(Color.white);
+		
+		ImageIcon Icon9= new ImageIcon("images/pas.PNG");
+		btn9 =new JButton("∆ƒΩ∫ƒÌ¬Ó",Icon9);
+		p.add(btn9);
+		btn9.setHorizontalTextPosition(JButton.CENTER);
+		btn9.setVerticalTextPosition(JButton.BOTTOM);
+		btn9.setBackground(Color.white);
+		
+		btnb =new JButton("µπæ∆∞°±‚");
+		
+		EventHendler eh=new EventHendler();
+		
+		btn1.addActionListener(eh);
+		btnb.addActionListener(eh);
+		
 		pn.add(btnb);
 		btnb.setHorizontalAlignment(JButton.LEFT);
 		btnb.setVerticalAlignment(JButton.BOTTOM);
 		
-		JLabel lb=new JLabel("Ïπ¥Ìéò");
+		btnb.setBackground(Color.white);
+		JLabel lb=new JLabel("ƒ´∆‰");
 		pn.add(lb);
+		btnb.setBackground(Color.white);
+		pn.add(btnb,"EAST");
 		
-	}//ÏÉùÏÑ±Ïûê------
+	}//ª˝º∫¿⁄------
 
-	public static void main(String[] args) {
-		ButtonCoffee my = new ButtonCoffee();
-		my.setSize(500, 500);
-		my.setVisible(true);
+	/*
+	 * public static void main(String[] args) { ButtonCoffee my = new
+	 * ButtonCoffee(); my.setSize(500, 500); my.setVisible(true); }
+	 */
+	
+	
+class EventHendler implements ActionListener{
+		
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Object o=e.getSource();
+			/*if(o==btnb) {
+				ma.card.show(ma, "mainP");
+			}else if(o==btn1) {
+				ma.card.show(ma, "star");
+			}*/
+			
+			
+		}
+		
 	}
 
 }

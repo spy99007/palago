@@ -29,13 +29,13 @@ public class SelectCoupon extends JPanel {
 		add(pN,"North");
 		pN.setSize(500,500);
 		pN.setBackground(Color.white);
-		pN.setBorder(new TitledBorder("ì¿ í°ì¢…ë¥˜"));
+		pN.setBorder(new TitledBorder("ÄíÆùÁ¾·ù"));
 		
-		ecoupon=new JButton("ê¸°í”„í‹° êµí™˜ê¶Œ");
-		voucher=new JButton("ìƒí’ˆê¶Œë¥˜");
-		discount=new JButton("í• ì¸ì¿ í°/ê¸°íƒ€");
-		bogo=new JButton("1+1ì¿ í°");
-		next=new JButton("ë‹¤ìŒ");
+		ecoupon=new JButton("±âÇÁÆ¼ ±³È¯±Ç");
+		voucher=new JButton("»óÇ°±Ç·ù");
+		discount=new JButton("ÇÒÀÎÄíÆù/±âÅ¸");
+		bogo=new JButton("1+1ÄíÆù");
+		next=new JButton("´ÙÀ½");
 		
 		pN.add(ecoupon);	pN.add(voucher);
 		pN.add(discount); 	pN.add(bogo);
@@ -43,7 +43,7 @@ public class SelectCoupon extends JPanel {
 		 
 
 	
-	}//ìƒì„±ì------
+	}//»ı¼ºÀÚ------
 
 	
 	@Override

@@ -1,66 +1,182 @@
 package admin;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Hashtable;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class NoticeWrite extends JPanel {
+public class NoticeWrite extends JFrame {
 
-	JPanel p = new JPanel();
-	JPanel p1= new JPanel(new BorderLayout());
-	JPanel p2= new JPanel(new GridLayout(1,0,20,40));
-	JTextField tf;
-	JTextArea ta;
-	JButton bt1, bt2;
+	JPanel p = new JPanel(new BorderLayout());
+	JPanel p1 = new JPanel(new GridLayout(0, 1, 20, 20));
+	JPanel p2 = new JPanel(new GridLayout(1, 2, 20, 40));
+	JPanel p3 = new JPanel(new GridLayout(0, 1, 20, 20));
+
+	JTextField tfTitle, tfName, tfregDate;
+	JTextArea taText;
+
+	JButton btEnroll, btCancel;
+	JLabel lbTitle, lbText, lbName, lbRegDate;
+
 	
-	Notice noti;
+	Notice notice;
 
-	public NoticeWrite(Notice frame) {
-		this.noti=frame;
+	public NoticeWrite(Notice notice ) {
+		super("∞¯¡ˆ¿€º∫");
+		this.notice=notice;
+		Container cp = this.getContentPane();
+		cp.add(p, "Center");
 		p.setBackground(Color.white);
+		p2.setBackground(Color.white);
+		p3.setBackground(Color.white);
+
 		add(p);
-		p.add(p1,"Center");
-		p1.add(p2,"South");
-		tf=new JTextField(30);
-		ta=new JTextArea(10,10);
-		bt1=new JButton("ÏôÑÎ£å");
-		bt2=new JButton("Ï¥àÍ∏∞Ìôî");
-		p1.add(tf,"North");
-		p1.add(ta,"Center");
-		p2.add(bt1,"South");
-		p2.add(bt2,"South");
+		p.add(p1, "Center");
+		p.add(p2, "South");
+		p.add(p3, "North");
+
+		tfTitle = new JTextField(30); // ¡¶∏Ò
+		tfName = new JTextField(5); // ¿€º∫¿⁄
+		tfregDate = new JTextField(8); // ¿€º∫¿œ
+		taText = new JTextArea(10, 10);//≥ªøÎ
+		btEnroll = new JButton("µÓ∑œ");
+		btCancel = new JButton("√Îº“");
+
+		lbTitle = new JLabel("¡¶∏Ò");
+		lbName = new JLabel("¿€º∫¿⁄");
+		lbRegDate = new JLabel("¿€º∫¿œ");
+		lbText = new JLabel("≥ªøÎ");
 		
-		ta.setBorder(new LineBorder(Color.black));
+		JScrollPane scroll= new JScrollPane(taText);
+
+		p3.add(tfTitle);
+		p3.add(tfName);
+		p3.add(tfregDate);
+		p1.add(scroll);
+		p2.add(btEnroll, "South");
+		p2.add(btCancel, "South");
 		
+		scroll.getViewport().setBackground(Color.white);
 		
+		btEnroll.setBackground(new Color(50,100,170));
+		btEnroll.setForeground(Color.white);
+		btCancel.setBackground(Color.DARK_GRAY);
+		btCancel.setForeground(Color.white);
 		
 
-	}//ÏÉùÏÑ±Ïûê------
+		p1.setOpaque(false);
 
-	
-	
-	public class Hanlder implements ActionListener{
+		TitledBorder tb1 = null, tb2 = null, tb3 = null, tb4 = null;
+		tfTitle.setBorder(tb1 = new TitledBorder("¡¶∏Ò"));
+		tfName.setBorder(tb2 = new TitledBorder("¿€º∫¿⁄"));
+		tfregDate.setBorder(tb3 = new TitledBorder("¿€º∫¿œ"));
+		taText.setBorder(tb4 = new TitledBorder("≥ªøÎ"));
+		tfTitle.setOpaque(false);
+		tfName.setOpaque(false);
+		tfregDate.setOpaque(false);
+		taText.setOpaque(false);
+		tb1.setTitleColor(Color.BLACK);
+		tb2.setTitleColor(Color.black);
+		tb3.setTitleColor(Color.black);
+		tb4.setTitleColor(Color.black);
+
+		Hanlder hand = new Hanlder();
+		btEnroll.addActionListener(hand);
+		btCancel.addActionListener(hand);
 		
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				//noticeTable ∫“∑ØøÕº≠ ∫∏ø©¡÷±‚
+				notice.readFile("src/admin/notice.txt");
+				notice.showNoticeTable();
+				notice.table.updateUI();
+				dispose();
+			}
+		});
+
+	}// ------------------
+
+	class Hanlder implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			Object o=e.getSource();
-			if(o==bt1) {
-				
+
+			Object o = e.getSource();
+			if (o == btEnroll) {
+				enrollCheck();	
+				clearInput();
+			} else if (o == btCancel) {
+				dispose();
 			}
 		}
-		
-	}
 	
-	
-	public Insets getInsets() {
-		return new Insets(45,25,25,25);
 	}
 
-	/*public static void main(String[] args) {
-		NoticeWrite my = new NoticeWrite();
-		my.setSize(500, 500);
-		my.setVisible(true);
-	}*/
+	// µÓ∑œπˆ∆∞ ∏ﬁº“µÂ
+	public void inputTable() {
+		String title = tfTitle.getText();
+		String name = tfName.getText();
+		String regDate = tfregDate.getText();
+		String text = taText.getText();
+
+		WriteMessage write = new WriteMessage(title, text, name, regDate);
+		notice.noticeTable.put(title, write);
+		System.out.println(notice.noticeTable);
+		setTitle("∞‘Ω√±€ µÓ∑œ øœ∑·! «ˆ¿Á ∞‘Ω√±€ ºˆ: " + notice.noticeTable.size() + "∞≥");
+		//∆ƒ¿œ¿˙¿Â
+		notice.saveFile("src/admin/notice.txt");
+		JOptionPane.showMessageDialog(p, "¿€º∫øœ∑·!");
+		notice.readFile("src/admin/notice.txt");
+		notice.showNoticeTable();
+		notice.table.updateUI();
+		dispose();
+		
+	}
+
+	// ±€ µÓ∑œ¿ª ¿ß«— πˆ∆∞ ¡∂∞« ∏ﬁº“µÂ
+	public void enrollCheck() {
+
+		String notiTitle = tfTitle.getText();
+		String notiName = tfName.getText();
+		String notiRegDate = tfregDate.getText();
+		String notiText = taText.getText();
+
+		if (notiTitle == null || notiText == null || notiName == null || notiRegDate == null
+				|| notiTitle.trim().equals("") || notiText.trim().equals("") || notiName.trim().equals("")
+				|| notiRegDate.trim().equals("")) {
+			JOptionPane.showMessageDialog(p, "∫Ûƒ≠¿Ã ¿÷æÓø‰ ¿‘∑¬«œººø‰");
+			return;
+		} else {
+			inputTable();
+
+		}
+	}
+	//noticewrite √ ±‚»≠
+	public void clearInput() {
+		tfTitle.setText("");
+		tfName.setText("");
+		tfregDate.setText("");
+		taText.setText("");	
+		tfTitle.requestFocus();
+	}
+
+	public Insets getInsets() {
+		return new Insets(45, 25, 25, 25);
+	}
 
 }

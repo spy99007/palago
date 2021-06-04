@@ -3,19 +3,20 @@ package product;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 public class CouponType extends JPanel {
 
-	
-	JPanel pN= new JPanel(new GridLayout(2,2,20,20));
+	JPanel p = new JPanel();
+	JPanel pN= new JPanel(new GridLayout(2,2,30,30));
 	
 	JButton ecoupon;
 	JButton voucher;
 	JButton discount;
 	JButton bogo;
 	JButton next;
-	
+	 
 	SellMainFrame sellF;
 
 	public CouponType(SellMainFrame sell) {
@@ -25,16 +26,26 @@ public class CouponType extends JPanel {
 		
 		setBackground(Color.white);
 		
-		add(pN,"North");
-		pN.setSize(500,500);
-		pN.setBackground(Color.white);
-		pN.setBorder(new TitledBorder("ì¿ í°ì¢…ë¥˜"));
+		add(p,"North");
+		p.add(pN);
 		
-		ecoupon=new JButton("ê¸°í”„í‹° êµí™˜ê¶Œ");
-		voucher=new JButton("ìƒí’ˆê¶Œë¥˜");
-		discount=new JButton("í• ì¸ì¿ í°/ê¸°íƒ€");
-		bogo=new JButton("1+1ì¿ í°");
-		next=new JButton("ë‹¤ìŒ");
+		sellF.myborder(p, "ÄíÆùÁ¾·ù");
+		pN.setBackground(Color.white);
+		pN.setBorder(new EmptyBorder(10,10,10,10));
+
+		
+		ecoupon=new JButton("±âÇÁÆ¼ ±³È¯±Ç");
+		voucher=new JButton("»óÇ°±Ç·ù");
+		discount=new JButton("ÇÒÀÎÄíÆù/±âÅ¸");
+		bogo=new JButton("1+1ÄíÆù");
+		next=new JButton("´ÙÀ½");
+		
+		sellF.myFont(ecoupon,14);
+		sellF.myFont(voucher,14);
+		sellF.myFont(discount,14);
+		sellF.myFont(bogo,14);
+		sellF.myFont(next,14);
+		
 		
 		pN.add(ecoupon);	pN.add(voucher);
 		pN.add(discount); 	pN.add(bogo);
@@ -42,7 +53,7 @@ public class CouponType extends JPanel {
 		 
 
 	
-	}//ìƒì„±ì------
+	}//»ı¼ºÀÚ------
 
 	
 	@Override

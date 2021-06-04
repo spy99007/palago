@@ -15,7 +15,7 @@ public class QnA extends JFrame {
 	private JPanel contentPane;
 
 	public QnA() {
-		setTitle("ë¬¸ì˜í•˜ê¸°");
+		setTitle("¹®ÀÇÇÏ±â");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -23,8 +23,8 @@ public class QnA extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		// ë¬¸ì˜í•˜ê¸° - ë¬¸ì˜ê¸€ ì‘ì„±í•˜ê¸° ë²„íŠ¼ (QnA2.javaë¡œ íŒ¨ë„ ì „í™˜)
-		JButton qbtn1 = new JButton("ë¬¸ì˜ê¸€ ì‘ì„±í•˜ê¸°");
+		// ¹®ÀÇÇÏ±â - ¹®ÀÇ±Û ÀÛ¼ºÇÏ±â ¹öÆ° (QnA2.java·Î ÆĞ³Î ÀüÈ¯)
+		JButton qbtn1 = new JButton("¹®ÀÇ±Û ÀÛ¼ºÇÏ±â");
 		qbtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -37,8 +37,8 @@ public class QnA extends JFrame {
 		qbtn1.setBounds(50, 150, 170, 140);
 		contentPane.add(qbtn1);
 
-		// ë¬¸ì˜í•˜ê¸° - 1:1 ë¬¸ì˜í•˜ê¸° ë²„íŠ¼ (QnA3.javaë¡œ íŒ¨ë„ ì „í™˜)
-		JButton qbtn2 = new JButton("1:1 ë¬¸ì˜í•˜ê¸°");
+		// ¹®ÀÇÇÏ±â - 1:1 ¹®ÀÇÇÏ±â ¹öÆ° (QnA3.java·Î ÆĞ³Î ÀüÈ¯)
+		JButton qbtn2 = new JButton("1:1 ¹®ÀÇÇÏ±â");
 		qbtn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -51,8 +51,8 @@ public class QnA extends JFrame {
 		qbtn2.setBounds(285, 150, 170, 140);
 		contentPane.add(qbtn2);
 
-		// ë¬¸ì˜í•˜ê¸° - ë©”ì¸ìœ¼ë¡œ ëŒì•„ê°€ê¸° ë²„íŠ¼
-		JButton qbtn3 = new JButton("ë©”ì¸ê°€ê¸°");
+		// ¹®ÀÇÇÏ±â - ¸ŞÀÎÀ¸·Î µ¹¾Æ°¡±â ¹öÆ°
+		JButton qbtn3 = new JButton("¸ŞÀÎ°¡±â");
 		qbtn3.setBounds(195, 413, 117, 29);
 		contentPane.add(qbtn3);
 	}

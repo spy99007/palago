@@ -21,24 +21,24 @@ public class Handler extends MouseAdapter implements ActionListener{
 		String selproduct=sellF.productP.ptf.getText();
 		
 		if(obj==sellF.couponP.next) {
-			//Ï†ÄÏû•
+			//¿˙¿Â
 			sellF.card.show(sellF.pC, "brand");
 		}else if(obj==sellF.brandP.before) {
 			sellF.card.show(sellF.pC, "coupon");
 		}else if(obj==sellF.brandP.next) {
-			//Ï†ÄÏû•
+			//¿˙¿Â
 			sellF.detailP.pname.setText(selbrand);
 			sellF.card.show(sellF.pC, "product");
 		}else if(obj==sellF.productP.before) {
 			sellF.card.show(sellF.pC, "brand");
 		}else if(obj==sellF.productP.next) {
-			//Ï†ÄÏû•
+			//¿˙¿Â
 			sellF.detailP.pname.setText(selbrand+"  "+selproduct);
 			sellF.card.show(sellF.pC, "detail");
 		}else if(obj==sellF.detailP.before) {
 			sellF.card.show(sellF.pC, "product");
 		}else if(obj==sellF.detailP.fin) {
-			//Ï†ÄÏû•
+			//¿˙¿Â
 			System.exit(0);
 		}
 		
@@ -49,7 +49,7 @@ public class Handler extends MouseAdapter implements ActionListener{
 	public void mousePressed(MouseEvent e) {
 		Object obj=e.getSource();
 		if(obj==sellF.exit) {
-//			Î©îÏù∏ÏúºÎ°ú
+//			∏ﬁ¿Œ¿∏∑Œ
 			System.exit(0);	
 		}else if(obj==sellF.brandP.btf) {
 			sellF.brandP.btf.setText("");

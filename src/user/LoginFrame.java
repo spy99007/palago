@@ -1,10 +1,25 @@
 package user;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Enumeration;
+import java.util.Hashtable;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import common.Common;
+import product.MainA;
+import user.User;
 public class LoginFrame extends JFrame {
 
 	JPanel p = new JPanel();
@@ -13,10 +28,17 @@ public class LoginFrame extends JFrame {
 	JTextField tfId;
 	JPasswordField tfPwd;
 	JoinFrame joinF;
+	MainA mainF; 
+	FindPassword fp;
+	Common com;
+	
+	
+	
 	public LoginFrame() {
 		
 		super("::LoginFrame::");
-		
+		mainF =new MainA(this);
+		FindPassword fp= new FindPassword();
 		
 		p.setLayout(new BorderLayout());
 		add(p);
@@ -39,28 +61,40 @@ public class LoginFrame extends JFrame {
 		tfId.setBounds(100,90,170,50);
 		tfPwd.setBounds(100,180,170,50);
 		p1.setBackground(Color.WHITE);		
-		btJoin    = new JButton("ÌöåÏõêÍ∞ÄÏûÖ");
-		btFind    = new JButton("Ï†ïÎ≥¥Ï∞æÍ∏∞");
-		btLogin   = new JButton("Î°úÍ∑∏Ïù∏");
+		btJoin    = new JButton("»∏ø¯∞°¿‘");
+		btFind    = new JButton("¡§∫∏√£±‚");
+		btLogin   = new JButton("∑Œ±◊¿Œ");
 		
 		pS.add(btJoin);
 		pS.add(btFind);
 		pS.add(btLogin);
 		
-		tfId.setBorder(new TitledBorder("ÏïÑÏù¥Îîî"));
-		tfPwd.setBorder(new TitledBorder("ÎπÑÎ∞ÄÎ≤àÌò∏"));
-
+		tfId.setBorder(new TitledBorder("æ∆¿Ãµ"));
+		tfPwd.setBorder(new TitledBorder("∫Òπ–π¯»£"));
+		
+		joinF=new JoinFrame(this);
+		com=Common.getCommon();
+		//∑Œ±◊¿Œπˆ∆∞
 		btLogin.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) { 
+				login();
+				/*if(obj==btLogin) {
+					main.pack();
+					main.setSize(500,500);
+					main.setVisible(true);
+					
+					main.setTitle(tfId.getText()+"¥‘ ¡¢º”¡ﬂ¿‘¥œ¥Ÿ.");
+					//∑Œ±◊¿Œ«—æ∆¿Ãµ πﬁæ∆øÕº≠ main∆‰¿Ã¡ˆø° ¡¢º”¡ﬂ ª—∏Æ±‚ 
+					dispose();
 				
-			
-			} 
+				}*///∑Œ±◊¿Œ πˆ∆∞
+			}	
 		});
-		
+		//»∏ø¯∞°¿‘πˆ∆∞
 		btJoin.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) { 
 				Object obj = e.getSource();
-				JoinFrame joinF = new JoinFrame();
+				
 				if(obj==btJoin) {
 					joinF.pack();
 					joinF.setSize(500, 600);
@@ -68,52 +102,81 @@ public class LoginFrame extends JFrame {
 				}
 			} 
 		});
-		
-		
+		//¿Ã∏ﬁ¿œ∑Œ æ∆¿Ãµ π◊ ∫Òπ–π¯»£ √£±‚ πˆ∆∞ 
+		btFind.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				Object obj = e.getSource();
+				
+				if(obj==btFind) {
+					fp.pack();
+					fp.setSize(500,500);
+					fp.setVisible(true);
+					
+				}
+			} 
+		});
 		
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}//ÏÉùÏÑ±Ïûê------
+	}//ª˝º∫¿⁄------
 	
-	
+	//∑Œ±◊¿Œ ∏ﬁº“µÂ
 	 public void login() {
 		 String id = tfId.getText();
 		 char[] ch = tfPwd.getPassword();
 		 String pwd =new String(ch);
 		 
 		 if(id==null||pwd==null||id.trim().equals("")||pwd.trim().equals("")) {
-			 JOptionPane.showMessageDialog(pC,"ÏïÑÏù¥ÎîîÎ•º ÏûÖÎ†•Î†•ÌïòÏÑ∏Ïöî");
+			 JOptionPane.showMessageDialog(pC,"æ∆¿Ãµ∏¶ ¿‘∑¬∑¬«œººø‰");
 			 return;
 		 }
 		 id=id.trim();
 		 pwd=pwd.trim();
 		 
-		 //nullÏ≤¥ÌÅ¨ 
+		 //null√º≈© 
 		 
-		 boolean isExist = joinF.userTable.containsKey(id);
 		 
-		 if(!isExist) {
-			 JOptionPane.showMessageDialog(pC,"Ìï¥ÎãπÌïòÎäî ÏïÑÏù¥ÎîîÍ∞Ä ÏóÜÏäµÎãàÎã§.");
-			 tfId.setText("");
-			 tfPwd.setText("");
-			 tfId.requestFocus();
-			 return;
-		 }//ÏïÑÏù¥Îîî Ï≤¥ÌÅ¨
 		 
-		 User tmpUser = joinF.userTable.get(id);
-		 String tmpPwd= tmpUser.getPwd();
-		 if(!pwd.equals(tmpPwd)) {
-			 JOptionPane.showMessageDialog(pC,"ÎπÑÎ∞ÄÎ≤àÌò∏Í∞Ä ÌãÄÎ†∏ÏäµÎãàÎã§.");
-			 tfId.setText("");
-			 tfPwd.setText("");
-			 tfId.requestFocus();
+		 User user=com.getUser(id);
+		 //¿Ø¿˙∞¥√º∞°¡Æø¿±‚
+		 
+		 if(user==null) {
+			 JOptionPane.showMessageDialog(pC,"«ÿ¥Á«œ¥¬ æ∆¿Ãµ∞° æ¯Ω¿¥œ¥Ÿ.");
 			 return;
 		 }
+		 if(user!=null) {
+			 	System.out.println(pwd);
+			 	System.out.println(user.getPwd());
+			 if(!pwd.equals(user.getPwd())) {
+				 JOptionPane.showMessageDialog(pC,"∫Òπ–π¯»£∞° ∆≤∏≥¥œ¥Ÿ.");
+				 return;
+			 }
+		 }
 		 
-		 JOptionPane.showMessageDialog(pC,"Î°úÍ∑∏Ïù∏ ÎêòÏóàÏäµÎãàÎã§.");
+		 JOptionPane.showMessageDialog(pC,"∑Œ±◊¿Œ µ«æ˙Ω¿¥œ¥Ÿ.");
 		 
-		 
-		 
+			this.setTitle(id);
+			System.out.println("here>>>>"+id);
+			  
+				
+			
+			
+			 
+			 
+			   
+			  //MainA mainF= new MainA(this);
+			  //JFrame jf=new JFrame();
+			  
+				/*
+				 * jf.getContentPane().add(mainF); jf.setSize(500, 500); jf.setVisible(true);
+				 */
+				
+			 mainF.setSize(500,500); mainF.setVisible(true);
+			  mainF.setTitle(tfId.getText()); //∑Œ±◊¿Œ«—æ∆¿Ãµ πﬁæ∆øÕº≠ main∆‰¿Ã¡ˆø° ¡¢º”¡ﬂ ª—∏Æ±‚
+			 mainF.setId(tfId.getText());
+			  
+			  
+			  dispose();
 	 }
 	
 	

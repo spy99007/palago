@@ -1,13 +1,22 @@
 package report;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import admin.MyPage;
+import product.Client;
+import product.Page;
+import product.Server;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -15,54 +24,97 @@ import javax.swing.JTextField;
 public class QnA3 extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField	tf;
-	private String[] chat= {"ì „ì²´ ëŒ€í™”", "íŒë‹ˆë‹¤ ëŒ€í™”", "ì‚½ë‹ˆë‹¤ ëŒ€í™”"};
+	private JTextField tf;
+	// private String[] chat= {"ÀüÃ¼ ´ëÈ­", "ÆË´Ï´Ù ´ëÈ­", "»ğ´Ï´Ù ´ëÈ­"};
 
 	public QnA3() {
-		setTitle("1:1 ë¬¸ì˜í•˜ê¸°");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("1:1 ¹®ÀÇÇÏ±â");
 		setBounds(100, 100, 500, 500);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(Color.white);
+
+		//Server ¹öÆ° 
+		ImageIcon Icon1 = new ImageIcon("images/server.png");
+		JButton btnsv1 = new JButton("Server",Icon1);
+		btnsv1.setBounds(50, 125, 200, 200);
+		btnsv1.setHorizontalTextPosition(JButton.CENTER);
+		btnsv1.setVerticalTextPosition(JButton.BOTTOM);
+		btnsv1.setBorderPainted(false);
 		
+		//Client ¹öÆ°
+		ImageIcon Icon2 = new ImageIcon("images/client2.png");
+		JButton btnct2 = new JButton("Client",Icon2);
+		btnct2.setBounds(250, 125, 200, 200);
+		btnct2.setHorizontalTextPosition(JButton.CENTER);
+		btnct2.setVerticalTextPosition(JButton.BOTTOM);
+		btnct2.setBorderPainted(false);
+
 		
-		// ì±„íŒ… - "ì „ì²´ ëŒ€í™”", "íŒë‹ˆë‹¤ ëŒ€í™”", "ì‚½ë‹ˆë‹¤ ëŒ€í™”" ì„ íƒí•˜ê¸°
-		JComboBox<String> comboBox = new JComboBox<String>(chat);
-		comboBox.setBounds(32, 8, 160, 60);
-		contentPane.add(comboBox);
-		
-		
-		// ì±„íŒ… ì „ íŒë§¤ì ê²€ìƒ‰í•˜ëŠ” textField
-		tf = new JTextField();
-		tf.setBounds(32, 50, 450, 40);
-		contentPane.add(tf);
-		tf.setColumns(10);
-		
-		
-		
-		// 1:1 ë¬¸ì˜í•˜ê¸° - ë’¤ë¡œê°€ê¸° ë²„íŠ¼ (QnA.javaë¡œ íŒ¨ë„ ì „í™˜) 
-		JButton q3btn1 = new JButton("ë’¤ë¡œê°€ê¸°");
+		// ¹öÆ°Å¬¸¯ ¾×¼Ç¿¡ ¹İÀÀÇÏ±â À§ÇØ ¸®½º³Ê °´Ã¼ »ı¼º ¹× Ãß°¡
+		btnsv1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// ServerFrame °´Ã¼ »ı¼º
+				Server frame = new Server();
+			}
+		});
+		btnct2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// ClientFrame °´Ã¼ »ı¼º
+				Client frame = new Client();
+			}
+		});
+
+		contentPane.add(btnsv1);
+		contentPane.add(btnct2);
+
+		JButton q3btn1 = new JButton();
+		q3btn1.setIcon(new ImageIcon("./images/back.png"));
+		q3btn1.setSelectedIcon(new ImageIcon("./images/back.png"));
 		q3btn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				QnA q1 = new QnA();
-				q1.setSize(500,500);
-				q1.setVisible(true);
+				Page mp = new Page();
+				mp.setSize(500,500);
+				mp.setVisible(true);
 			}
 		});
-		q3btn1.setBounds(350, 400, 115, 30);
+		q3btn1.setBounds(10,10,30,30);
 		contentPane.add(q3btn1);
+		q3btn1.setBorderPainted(false);
+		
+		
+		JButton mbtn2 = new JButton("");
+		mbtn2.setBounds(450, 10, 40, 40);
+		mbtn2.setIcon(new ImageIcon("./images/notify.png"));
+		mbtn2.setSelectedIcon(new ImageIcon("./images/notify.png"));
+		mbtn2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Report rp = new Report();
+				rp.setSize(500, 500);
+				rp.setVisible(true);
+			}
+		});
+		contentPane.add(mbtn2);
+		mbtn2.setBorderPainted(false);
+
 	}
 	
+	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					QnA3 q3 = new QnA3();
-					q3.setVisible(true);
 					q3.setVisible(true);
 					q3.setResizable(false);
 				} catch (Exception e) {

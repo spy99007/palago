@@ -14,7 +14,7 @@ public class SellTab extends JFrame {
 	private JPanel contentPane;
 
 	public SellTab() {
-		setTitle("íŒë§¤ê´€ë¦¬");
+		setTitle("ÆÇ¸Å°ü¸®");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -22,7 +22,7 @@ public class SellTab extends JFrame {
 		contentPane.setLayout(null);
 
 		
-		JButton stbtn1 = new JButton("íŒë§¤ì¤‘ ìƒí’ˆ");
+		JButton stbtn1 = new JButton("ÆÇ¸ÅÁß »óÇ°");
 		stbtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -36,7 +36,7 @@ public class SellTab extends JFrame {
 		contentPane.add(stbtn1);
 
 		
-		JButton stbtn2 = new JButton("íŒë§¤ë‚´ì—­");
+		JButton stbtn2 = new JButton("ÆÇ¸Å³»¿ª");
 		stbtn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -52,7 +52,7 @@ public class SellTab extends JFrame {
 		
 		
 
-		JButton stbtn3 = new JButton("ì‹ ê³ í•˜ê¸°");
+		JButton stbtn3 = new JButton("½Å°íÇÏ±â");
 		stbtn3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -68,7 +68,7 @@ public class SellTab extends JFrame {
 		
 		
 
-		JButton stbtn4 = new JButton("ë©”ì¸ìœ¼ë¡œ ëŒì•„ê°€ê¸°");
+		JButton stbtn4 = new JButton("¸ŞÀÎÀ¸·Î µ¹¾Æ°¡±â");
 		stbtn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

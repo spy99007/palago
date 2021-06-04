@@ -13,7 +13,7 @@ public class Handler extends MouseAdapter implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		mainF.setTitle("ê¸°ëŠ¥í•¨");
+		mainF.setTitle("±â´ÉÇÔ");
 		Object o=e.getSource();
 		if(o==myP.bt1) {
 			

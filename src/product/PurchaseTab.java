@@ -15,7 +15,7 @@ public class PurchaseTab extends JFrame {
 	private JPanel contentPane;
 
 	public PurchaseTab() {
-		setTitle("êµ¬ë§¤ê´€ë¦¬");
+		setTitle("±¸¸Å°ü¸®");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -23,7 +23,7 @@ public class PurchaseTab extends JFrame {
 		contentPane.setLayout(null);
 
 		
-		JButton ptbtn1 = new JButton("êµ¬ë§¤ìš”ì²­ ìƒí’ˆ");
+		JButton ptbtn1 = new JButton("±¸¸Å¿äÃ» »óÇ°");
 		ptbtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -37,7 +37,7 @@ public class PurchaseTab extends JFrame {
 		contentPane.add(ptbtn1);
 
 		
-		JButton ptbtn2 = new JButton("êµ¬ë§¤ë‚´ì—­");
+		JButton ptbtn2 = new JButton("±¸¸Å³»¿ª");
 		ptbtn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -53,7 +53,7 @@ public class PurchaseTab extends JFrame {
 		
 		
 
-		JButton ptbtn3 = new JButton("êµ¬ë§¤í•˜ê¸°");
+		JButton ptbtn3 = new JButton("±¸¸ÅÇÏ±â");
 		ptbtn3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -67,7 +67,7 @@ public class PurchaseTab extends JFrame {
 		contentPane.add(ptbtn3);
 		
 		
-		JButton ptbtn4 = new JButton("ì‹ ê³ í•˜ê¸°");
+		JButton ptbtn4 = new JButton("½Å°íÇÏ±â");
 		ptbtn4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -83,7 +83,7 @@ public class PurchaseTab extends JFrame {
 		
 		
 
-		JButton ptbtn5 = new JButton("ë©”ì¸ìœ¼ë¡œ ëŒì•„ê°€ê¸°");
+		JButton ptbtn5 = new JButton("¸ŞÀÎÀ¸·Î µ¹¾Æ°¡±â");
 		ptbtn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

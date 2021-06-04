@@ -11,7 +11,7 @@ public class ProductsOnSaleTab extends JFrame {
 
 	
 	public ProductsOnSaleTab() {
-		setTitle("íŒë§¤ê´€ë¦¬");
+		setTitle("ÆÇ¸Å°ü¸®");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -20,8 +20,8 @@ public class ProductsOnSaleTab extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		// íŒë§¤ê´€ë¦¬ - íŒë§¤ì¤‘ ìƒí’ˆ Label 
-		JLabel poslb1 = new JLabel("íŒë§¤ì¤‘ ìƒí’ˆ");
+		// ÆÇ¸Å°ü¸® - ÆÇ¸ÅÁß »óÇ° Label 
+		JLabel poslb1 = new JLabel("ÆÇ¸ÅÁß »óÇ°");
 		poslb1.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		poslb1.setBounds(70, 35, 61, 16);
 		contentPane.add(poslb1);
@@ -32,7 +32,7 @@ public class ProductsOnSaleTab extends JFrame {
 		tf.setColumns(10);
 		
 		
-		JButton posbtn1 = new JButton("ê²€ìƒ‰");
+		JButton posbtn1 = new JButton("°Ë»ö");
 		posbtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -46,8 +46,8 @@ public class ProductsOnSaleTab extends JFrame {
 		
 		
 		
-		// íŒë§¤ê´€ë¦¬ - íŒë§¤ì¤‘ ìƒí’ˆ íŒ¨ë„ì˜ ë’¤ë¡œê°€ê¸° ë²„íŠ¼ ( SellTab(íŒë§¤ê´€ë¦¬ ë©”ë‰´ì„ íƒ í™”ë©´)ìœ¼ë¡œ íŒ¨ë„ì „í™˜ )
-		JButton posbtn2 = new JButton("ë’¤ë¡œê°€ê¸°");
+		// ÆÇ¸Å°ü¸® - ÆÇ¸ÅÁß »óÇ° ÆĞ³ÎÀÇ µÚ·Î°¡±â ¹öÆ° ( SellTab(ÆÇ¸Å°ü¸® ¸Ş´º¼±ÅÃ È­¸é)À¸·Î ÆĞ³ÎÀüÈ¯ )
+		JButton posbtn2 = new JButton("µÚ·Î°¡±â");
 		posbtn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

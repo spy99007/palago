@@ -2,7 +2,17 @@ package product;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.*;
+
 import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.event.*;
+
 
 public class SellMainFrame extends JFrame {
  
@@ -17,27 +27,41 @@ public class SellMainFrame extends JFrame {
 
 	CardLayout card;
 	
-	JLabel pgnum;
+	JLabel sellicon;
 	JLabel exit;
 	
+	Vector<Coupon> coupons=new Vector<>();
 	
-
+	String []cateArr={"Ä«Æä","ÆíÀÇÁ¡","¾ÆÀÌ½ºÅ©¸²,»§","ÇÜ¹ö°Å,Ä¡Å²,ÇÇÀÚ",
+			"°ÔÀÓ,¿µÈ­,¹®È­","¿Ü½Ä,ºĞ½Ä","¹éÈ­Á¡,ºäÆ¼","ÈŞ´ëÆù µ¥ÀÌÅÍ"};
+	String []brandArr={"½ºÅ¸¹÷½º","Åõ½æÇÃ·¹ÀÌ½º","ÀÌµğ¾ß","ÇÒ¸®½º","Æú¹Ù¼Â","Å½¾ØÅ½½º","CU","¶Ñ·¹Áê¸£","¹ö°ÅÅ·",
+			"¿Ã¸®ºê¿µ"};
+	String []productArr={"¾Æ¸Ş¸®Ä«³ë","¾ÆÀÌ½º¾Æ¸Ş¸®Ä«³ë","Ä«Æä¶ó¶¼","¾ÆÀÌ½º¹Ù´Ò¶ó¶ó¶¼","±×¸°Æ¼¶ó¶¼"};
+	
+	
+	ObjectOutputStream out;
+	FileOutputStream fout;
+	
+	
 	public SellMainFrame() {
-		super("::RegistSell::");
+		super("::'ÆÈ°Ô¿ä' ÀÛ¼º::");
 		Container cp = this.getContentPane();
 		cp.add(p, "Center");
-		p.setBackground(Color.white);
+		p.setBackground(Color.white); 
 		pN.setBackground(Color.white);
 		pC.setBackground(Color.white);
 		
 		p.add(pN,"North");
 		p.add(pC,"Center");
+		pN.setBackground(new Color(50,100,170));
 		
-		pgnum=new JLabel(new ImageIcon("images/selling.png"));
-		exit=new JLabel(new ImageIcon("images/exit.png"));
-		pN.add(pgnum);
+		//»ó´Ü sell,x ¾ÆÀÌÄÜ
+		sellicon=new JLabel(new ImageIcon("images/sell2.png"));
+		exit=new JLabel(new ImageIcon("images/remove.png"));
+		pN.add(sellicon,"West");
 		pN.add(exit,"East");
 		
+		//Áß¾Ó - Ä«µå ·¹ÀÌ¾Æ¿ô 
 		pC.setLayout(card=new CardLayout());
 		couponP=new CouponType(this);
 		brandP=new BrandPage(this);
@@ -50,28 +74,79 @@ public class SellMainFrame extends JFrame {
 		pC.add("detail",detailP); 
 		
 		
-		Handler handler=new Handler(this);
+		HandlerSell handler=new HandlerSell(this);
 		exit.addMouseListener(handler);
 		couponP.next.addActionListener(handler);
 		
-		brandP.btf.addMouseListener(handler);
+		brandP.btf.addFocusListener(handler);
+		brandP.brandList.addListSelectionListener(handler);
 		brandP.before.addActionListener(handler);
 		brandP.next.addActionListener(handler);
 		
-		productP.ptf.addMouseListener(handler);
+		productP.ptf.addFocusListener(handler);
+		productP.productList.addListSelectionListener(handler);
 		productP.before.addActionListener(handler);
 		productP.next.addActionListener(handler);
 		
-		detailP.price1.addMouseListener(handler);
-		detailP.price2.addMouseListener(handler);
-		
+		detailP.price1.addFocusListener(handler);
+		detailP.price2.addFocusListener(handler);
+		detailP.pimage.addMouseListener(handler);
+		detailP.pinfo.addFocusListener(handler);
 		detailP.before.addActionListener(handler);
 		detailP.fin.addActionListener(handler);
 		
 	
-
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}//ìƒì„±ì------
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				//coupons ÆÄÀÏ¿¡ ÀúÀå
+				saveFile("src/palago/coupon.txt");
+				System.exit(0);
+			}
+		});
+	}//»ı¼ºÀÚ------
+	public void saveFile(String fileName) {
+		try {
+			fout=new FileOutputStream(fileName);
+			out=new ObjectOutputStream(fout);
+			out.writeObject(coupons);
+			out.flush();
+			out.close();
+			fout.close();
+			System.out.println(fileName+"¿¡ ÀúÀå ¿Ï·á!");
+		}catch(IOException e) {
+			System.out.println("ÆÄÀÏ ÀúÀå Áß ¿¡·¯ ¹ß»ı: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}//--------------
+		
+	
+	
+	//¸¶Áø ¼³Á¤
+	public void setmargin(JComponent c) {
+		c.setBorder(new EmptyBorder(0,20,0,0));
+	}//----------
+	
+	//¹öÆ° ÆùÆ® ¼³Á¤
+	public void myFont(JComponent c,int size) {
+		c.setBackground(new Color(50,100,170));
+		c.setForeground(Color.white);
+		c.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,size));
+	}//-------------------
+ 
+	//»ç¿ëÀÚ ÀÛ¼º ÅØ½ºÆ® »ö»ó,ÆùÆ®,¸¶Áø ¼³Á¤ 
+	public void settext(JComponent c) {
+		c.setForeground(Color.gray);
+		c.setFont(new Font("¸¼Àº °íµñ",Font.BOLD,13));
+		c.setBorder(new EmptyBorder(5,10,5,5));
+	}
+	//titledborder ¼³Á¤
+	public void myborder(JPanel p,String s) {
+		p.setBackground(Color.white);
+		TitledBorder tb=new TitledBorder(s);
+		tb.setTitleFont(new Font("¸¼Àº °íµñ",Font.BOLD,15));
+		tb.setTitleColor(new Color(50,100,170));
+		p.setBorder(tb);
+	}
 
 	public static void main(String[] args) {
 		SellMainFrame my = new SellMainFrame();

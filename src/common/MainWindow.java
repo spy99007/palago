@@ -1,53 +1,27 @@
 package common;
 
-import java.awt.ComponentOrientation;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
+import javax.swing.*;
 import java.text.DateFormat;
 import java.util.Date;
-
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-
-import product.PurchaseTab;
 
 public class MainWindow extends JFrame implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
 	private JTextArea ta = new JTextArea(100, 100);
-
 	JFormattedTextField textField = new JFormattedTextField(DateFormat.getDateInstance(DateFormat.SHORT));
 
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				MainWindow window = null;
-				try {
-					window = new MainWindow();
-					window.setVisible(true);
-				} catch (Exception exp) {
-					exp.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	public MainWindow() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 500);
-		setTitle("êµ¬ë§¤ë‚´ì—­ ì¡°íšŒ");
+		setTitle("±¸¸Å³»¿ª Á¶È¸");
 
 		Container cp = getContentPane();
 		FlowLayout flowLayout = new FlowLayout();
@@ -55,17 +29,21 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 		cp.setLayout(flowLayout);
 		cp.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
-		JLabel pblb1 = new JLabel("ì¡°íšŒê¸°ê°„ ê²€ìƒ‰í•˜ê¸°");
+		JLabel pblb1 = new JLabel("Á¶È¸±â°£ °Ë»öÇÏ±â");
 		pblb1.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		cp.add(pblb1);
 
-		textField.setValue(new Date()); // ìµœê·¼ ë‚ ì§œ
+		textField.setValue(new Date()); // ÃÖ±Ù ³¯Â¥
 		textField.setPreferredSize(new Dimension(130, 30));
 		cp.add(textField);
 
-		
-		JButton calButton = new JButton("ì¡°íšŒ");
+		//Á¶È¸¹öÆ°
+		ImageIcon Icon2 = new ImageIcon("images/calendar.png");
+		JButton calButton = new JButton("",Icon2);
 		cp.add(calButton);
+		calButton.setHorizontalTextPosition(JButton.CENTER);
+		calButton.setVerticalTextPosition(JButton.BOTTOM);
+		calButton.setBorderPainted(false);
 
 		
 		CalendarWindow calendarWindow = new CalendarWindow();
@@ -84,20 +62,18 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 			}
 		});
 
-		JButton backbtn = new JButton("ë’¤ë¡œê°€ê¸°");
+		JButton backbtn = new JButton("µÚ·Î°¡±â");
 		backbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				PurchaseTab pt = new PurchaseTab();
-				pt.setSize(500, 500);
-				pt.setVisible(true);
+				Menu menu = new Menu();
+				
 			}
 		});
 		backbtn.setBounds(265, 400, 115, 30);
 		cp.add(backbtn);
 		cp.add(new JScrollPane(ta));
-		
 
 	}
 
@@ -110,6 +86,20 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 
 			textField.setValue(selDate);
 		}
+	}
+	
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				MainWindow window = null;
+				try {
+					window = new MainWindow();
+					window.setVisible(true);
+				} catch (Exception exp) {
+					exp.printStackTrace();
+				}
+			}
+		});
 	}
 
 }

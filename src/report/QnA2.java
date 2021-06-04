@@ -22,7 +22,7 @@ public class QnA2 extends JFrame {
 	private JTextField tf;
 
 	public QnA2() {
-		setTitle("ë¬¸ì˜ê¸€ ì‘ì„±í•˜ê¸°");
+		setTitle("¹®ÀÇ±Û ÀÛ¼ºÇÏ±â");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -31,8 +31,8 @@ public class QnA2 extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		// ë¬¸ì˜ê¸€ ì‘ì„±í•˜ê¸° - ì œëª© Label, textField 
-		JLabel q2lb1 = new JLabel("ì œëª©");
+		// ¹®ÀÇ±Û ÀÛ¼ºÇÏ±â - Á¦¸ñ Label, textField 
+		JLabel q2lb1 = new JLabel("Á¦¸ñ");
 		q2lb1.setBounds(52, 42, 61, 16);
 		contentPane.add(q2lb1);
 		
@@ -42,8 +42,8 @@ public class QnA2 extends JFrame {
 		tf.setColumns(10);
 		
 		
-		// ë¬¸ì˜ê¸€ ì‘ì„±í•˜ê¸° - ë¬¸ì˜ë‚´ìš© Label, textArea
-		JLabel q2lb2 = new JLabel("ë¬¸ì˜ ë‚´ìš©");
+		// ¹®ÀÇ±Û ÀÛ¼ºÇÏ±â - ¹®ÀÇ³»¿ë Label, textArea
+		JLabel q2lb2 = new JLabel("¹®ÀÇ ³»¿ë");
 		q2lb2.setBounds(26, 99, 61, 16);
 		contentPane.add(q2lb2);
 		
@@ -52,11 +52,11 @@ public class QnA2 extends JFrame {
 		contentPane.add(ta);
 		
 		
-		// ë¬¸ì˜ê¸€ ì‘ì„±í•˜ê¸° - ë“±ë¡í•˜ê¸° ë²„íŠ¼
-		JButton q2btn1 = new JButton("ë“±ë¡í•˜ê¸°");
+		// ¹®ÀÇ±Û ÀÛ¼ºÇÏ±â - µî·ÏÇÏ±â ¹öÆ°
+		JButton q2btn1 = new JButton("µî·ÏÇÏ±â");
 		q2btn1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null, "ë“±ë¡ ë˜ì—ˆìŠµë‹ˆë‹¤.", "ë“±ë¡í•˜ê¸°",JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null, "µî·Ï µÇ¾ú½À´Ï´Ù.", "µî·ÏÇÏ±â",JOptionPane.PLAIN_MESSAGE);
 			dispose();
 			QnA q1 = new QnA();
 			q1.setSize(500,500);
@@ -67,8 +67,8 @@ public class QnA2 extends JFrame {
 		contentPane.add(q2btn1);
 		
 		
-		// ë¬¸ì˜ê¸€ ì‘ì„±í•˜ê¸° - ë’¤ë¡œê°€ê¸° ë²„íŠ¼ (ë¬¸ì˜í•˜ê¸°(QnA.java) íŒ¨ë„ë¡œ ì „í™˜ë¨)
-		JButton q2btn2 = new JButton("ë’¤ë¡œê°€ê¸°");
+		// ¹®ÀÇ±Û ÀÛ¼ºÇÏ±â - µÚ·Î°¡±â ¹öÆ° (¹®ÀÇÇÏ±â(QnA.java) ÆĞ³Î·Î ÀüÈ¯µÊ)
+		JButton q2btn2 = new JButton("µÚ·Î°¡±â");
 		q2btn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

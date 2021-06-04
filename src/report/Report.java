@@ -1,20 +1,25 @@
 package report;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import product.PurchaseTab;
-import product.SellTab;
+import product.Menu;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Report extends JFrame {
 
@@ -22,66 +27,68 @@ public class Report extends JFrame {
 	private JTextField tf;
 
 	public Report() {
-		setTitle("ì‹ ê³ í•˜ê¸°");
+		setTitle("½Å°íÇÏ±â");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
-		// ì‹ ê³ í•˜ê¸° - ì‹ ê³ í•  Username Label, textField
-		JLabel rplb1 = new JLabel("ì‹ ê³  Username");
-		rplb1.setBounds(20, 35, 95, 15);
+		contentPane.setBackground(Color.white);
+
+		// ½Å°íÇÏ±â - ½Å°íÇÒ Username Label, textField
+		JLabel rplb1 = new JLabel("½Å°í Username");
+		rplb1.setBounds(30, 60, 95, 15);
 		contentPane.add(rplb1);
-		
+
 		tf = new JTextField();
-		tf.setBounds(115, 30, 335, 30);
+		tf.setBounds(125, 55, 335, 30);
 		contentPane.add(tf);
 		tf.setColumns(10);
-		
-		
-		// ì‹ ê³ í•˜ê¸° - ì‹ ê³  ì‚¬ìœ  Label, textArea
-		JLabel rplb2 = new JLabel("ì‹ ê³  ì‚¬ìœ ");
-		rplb2.setBounds(55, 105, 60, 15);
+
+		// ½Å°íÇÏ±â - ½Å°í »çÀ¯ Label, textArea
+		JLabel rplb2 = new JLabel("½Å°í »çÀ¯");
+		rplb2.setBounds(70, 105, 60, 15);
 		contentPane.add(rplb2);
-		
+
 		JTextArea ta = new JTextArea();
-		ta.setBounds(115, 105, 335, 265);
+		ta.setBounds(125, 105, 335, 265);
 		contentPane.add(ta);
 		
 		
-		
-		// ì‹ ê³ í•˜ê¸° - ì‹ ê³  ì ‘ìˆ˜í•˜ê¸° ë²„íŠ¼ 
-		JButton rpbtn1 = new JButton("ì‹ ê³  ì ‘ìˆ˜í•˜ê¸°");
+		// ½Å°íÇÏ±â - µÚ·Î°¡±â ¹öÆ°
+		JButton rpbtn1 = new JButton();
+		rpbtn1.setIcon(new ImageIcon("./images/back.png"));
+		rpbtn1.setSelectedIcon(new ImageIcon("./images/back.png"));
 		rpbtn1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "ì ‘ìˆ˜ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.", "ì‹ ê³  ì ‘ìˆ˜",JOptionPane.PLAIN_MESSAGE);
-				dispose();
-				PurchaseTab pt = new PurchaseTab();
-				pt.setSize(500,500);
-				pt.setVisible(true);
-			}
-		});
-		rpbtn1.setBounds(145, 400, 115, 30);
-		contentPane.add(rpbtn1);
-		
-		
-		// ì‹ ê³ í•˜ê¸° - ë’¤ë¡œê°€ê¸° ë²„íŠ¼ (
-		JButton rpbtn2 = new JButton("ë’¤ë¡œê°€ê¸°");
-		rpbtn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				SellTab st = new SellTab();
-				st.setSize(500,500);
-				st.setVisible(true);
+				Menu menu = new Menu();
+				menu.setSize(500, 500);
+				menu.setVisible(true);
+			}
+		});
+		rpbtn1.setBounds(10,10,30,30);
+		contentPane.add(rpbtn1);
+		rpbtn1.setBorderPainted(false);
+
+		// ½Å°íÇÏ±â - ½Å°í Á¢¼öÇÏ±â ¹öÆ°
+		JButton rpbtn2 = new JButton("½Å°í Á¢¼öÇÏ±â");
+		rpbtn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Á¢¼ö°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.", "½Å°í Á¢¼ö", JOptionPane.PLAIN_MESSAGE);
+				dispose();
+				Menu menu = new Menu();
+				menu.setSize(500, 500);
+				menu.setVisible(true);
 			}
 		});
 		rpbtn2.setBounds(300, 400, 115, 30);
 		contentPane.add(rpbtn2);
+
 	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

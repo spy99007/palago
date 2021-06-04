@@ -2,8 +2,11 @@ package product;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
+
 
 public class BuyMainFrame extends JFrame {
 
@@ -13,27 +16,33 @@ public class BuyMainFrame extends JFrame {
 	
 	BuyProductPage buyproP;
 	BuyInfoPage infoP;
-	
+	 
 	CardLayout card;
 	
-	JLabel pgnum,exit;
+	JLabel buyicon,exit;
+	
+	String []cateArr={"ƒ´∆‰","∆Ì¿«¡°","æ∆¿ÃΩ∫≈©∏≤,ªß","«‹πˆ∞≈,ƒ°≈≤,««¿⁄",
+			"∞‘¿”,øµ»≠,πÆ»≠","ø‹Ωƒ,∫–Ωƒ","πÈ»≠¡°,∫‰∆º","»ﬁ¥Î∆˘ µ•¿Ã≈Õ"};
+	
 
 	public BuyMainFrame() {
-		super("::RegistBuyFrame::");
+		super("::'ªÏ∞‘ø‰' ¿€º∫::");
 		Container cp = this.getContentPane();
 		cp.add(p, "Center");
 		p.setBackground(Color.white);
 		
 		cp.add(p);
 		p.add(pN,"North"); 	p.add(pC,"Center"); 
-		whiteback(pN);
-		whiteback(pC);
+		pN.setBackground(new Color(50,100,170));
+		pC.setBackground(Color.white);	
 		
-		pgnum=new JLabel(new ImageIcon("images/buy.png"));
-		exit=new JLabel(new ImageIcon("images/exit.png"));
-		pN.add(pgnum);	
+		//»≠∏È ªÛ¥‹ buy,x æ∆¿Ãƒ‹
+		buyicon=new JLabel(new ImageIcon("images/buy.png"));
+		exit=new JLabel(new ImageIcon("images/remove.png"));
+		pN.add(buyicon,"West");	
 		pN.add(exit,"East");
 		
+		//¡ﬂæ”-card layout
 		pC.setLayout(card=new CardLayout());
 		buyproP=new BuyProductPage(this);
 		infoP=new BuyInfoPage(this);
@@ -41,29 +50,44 @@ public class BuyMainFrame extends JFrame {
 		pC.add("product",buyproP);
 		pC.add("info",infoP);
 		
-		HandlerBuy handlerbuy=new HandlerBuy(this);
 		
-		this.exit.addMouseListener(handlerbuy);
-		buyproP.pname.addMouseListener(handlerbuy);
-		buyproP.rate.addMouseListener(handlerbuy);
-		buyproP.won.addMouseListener(handlerbuy);
-		buyproP.max.addMouseListener(handlerbuy);
-		buyproP.min.addMouseListener(handlerbuy);
-		buyproP.next.addActionListener(handlerbuy);
+		HandlerBuy handlerB=new HandlerBuy(this);
+		this.exit.addMouseListener(handlerB);
+		buyproP.pname.addFocusListener(handlerB);
+		buyproP.won.addMouseListener(handlerB);
+		buyproP.price.addFocusListener(handlerB);
+		buyproP.next.addActionListener(handlerB);
 		
-		infoP.before.addActionListener(handlerbuy);
-		infoP.pinfo.addMouseListener(handlerbuy);
+		infoP.before.addActionListener(handlerB);
+		infoP.next.addActionListener(handlerB);
+		infoP.pimage.addMouseListener(handlerB);
+		infoP.pinfo.addFocusListener(handlerB);
 		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}//ÏÉùÏÑ±Ïûê------
+	}//ª˝º∫¿⁄------
 	
-	public void pborder(JPanel p,String str) {
-		p.setBorder(new TitledBorder(str));
+	//πˆ∆∞ ∆˘∆Æ º≥¡§
+	public void myFont(JComponent c,int size) {
+		c.setBackground(new Color(50,100,170));
+		c.setForeground(Color.white);
+		c.setFont(new Font("∏º¿∫ ∞ÌµÒ",Font.BOLD,size));
 	}
 	
-	public void whiteback(Component c) {
+	//titledborderº≥¡§
+	public void myborder(JComponent c,String str) {
 		c.setBackground(Color.white);
+		TitledBorder tb=new TitledBorder(str);
+		tb.setTitleFont(new Font("∏º¿∫ ∞ÌµÒ",Font.BOLD,15));
+		tb.setTitleColor(new Color(50,100,170));
+		c.setBorder(tb);
+	} 
+	
+	//ªÁøÎ¿⁄ ¿€º∫ ≈ÿΩ∫∆Æ - ªˆªÛ,∆˘∆Æ,∏∂¡¯ º≥¡§
+	public void mytext(JComponent c) {
+		c.setForeground(Color.gray);
+		c.setFont(new Font("∏º¿∫ ∞ÌµÒ",Font.BOLD,13));
+		c.setBorder(new EmptyBorder(5,5,5,5));
 	}
 
 	public static void main(String[] args) {

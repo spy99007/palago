@@ -5,10 +5,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Hashtable;
@@ -20,10 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
-import java.util.*;
+
+import common.Common;
 
 public class JoinFrame extends JFrame {
-
+	
+	LoginFrame loginF;
+	
 	JPanel p = new JPanel();
 	JPanel p2=new JPanel();
 	
@@ -34,7 +34,7 @@ public class JoinFrame extends JFrame {
 	JPasswordField tfPwd,tfPwd2;
 	JButton btOverlap,btJoin,btReset,btCancel;
 	
-	Hashtable <String,User> userTable =new Hashtable<>();
+	Hashtable <String,Object> userTable =new Hashtable<>();
 	
 	ObjectOutputStream out;
 	//ObjectInputStream in; 
@@ -44,8 +44,9 @@ public class JoinFrame extends JFrame {
 	//FileInputStream fin;
 	
 	
-	public JoinFrame() {
+	public JoinFrame(LoginFrame lf) {
 		super("::JoinFrame::");
+		this.loginF=lf;
 		Container cp = this.getContentPane();
 		
 		cp.add(p, "Center");
@@ -69,7 +70,7 @@ public class JoinFrame extends JFrame {
 		tfPwd2=new JPasswordField();
 		
 		
-		btOverlap=new JButton("ì¤‘ë³µê²€ì‚¬");
+		btOverlap=new JButton("Áßº¹°Ë»ç");
 		p2.add(tfId);
 		p2.add(btOverlap);
 		p2.add(tfNickName);
@@ -87,17 +88,17 @@ public class JoinFrame extends JFrame {
 		tfEmail.setBounds(125,350,200,40);
 		
 		
-		tfId.setBorder(new TitledBorder("ì•„ì´ë””"));
-		tfNickName.setBorder(new TitledBorder("ë‹‰ë„¤ì„"));
-		tfPwd.setBorder(new TitledBorder("ë¹„ë°€ë²ˆí˜¸"));
-		tfPwd2.setBorder(new TitledBorder("ë¹„ë°€ë²ˆí˜¸í™•ì¸"));
-		tfTel.setBorder(new TitledBorder("ì „í™”ë²ˆí˜¸"));
-		tfEmail.setBorder(new TitledBorder("ì´ë©”ì¼"));
+		tfId.setBorder(new TitledBorder("¾ÆÀÌµğ"));
+		tfNickName.setBorder(new TitledBorder("´Ğ³×ÀÓ"));
+		tfPwd.setBorder(new TitledBorder("ºñ¹Ğ¹øÈ£"));
+		tfPwd2.setBorder(new TitledBorder("ºñ¹Ğ¹øÈ£È®ÀÎ"));
+		tfTel.setBorder(new TitledBorder("ÀüÈ­¹øÈ£"));
+		tfEmail.setBorder(new TitledBorder("ÀÌ¸ŞÀÏ"));
 		
 		
-		btJoin     =new JButton("íšŒì›ê°€ì…");
-		btReset    =new JButton("ë‹¤ì‹œì“°ê¸°");
-		btCancel  =new JButton("ì·¨ì†Œ");
+		btJoin     =new JButton("È¸¿ø°¡ÀÔ");
+		btReset    =new JButton("´Ù½Ã¾²±â");
+		btCancel  =new JButton("Ãë¼Ò");
 		
 		p2.add(btJoin);
 		p2.add(btReset);
@@ -112,7 +113,7 @@ public class JoinFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) { 
 				Reset(); 
 			} });
-		  //ë¦¬ì…‹ë²„íŠ¼ ì´ë²¤íŠ¸ì²˜ë¦¬
+		  //¸®¼Â¹öÆ° ÀÌº¥Æ®Ã³¸®
 		
 		btJoin.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) { 
@@ -125,16 +126,16 @@ public class JoinFrame extends JFrame {
 		btOverlap.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) { 
 				if(tfId.getText().equals("")) {
-					JOptionPane.showMessageDialog(p2, "ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+					JOptionPane.showMessageDialog(p2, "¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
 					return;
 				}
 				
 				Boolean idCheckResult=idCheck(tfId.getText());
 				
 				if(!idCheckResult) {
-					JOptionPane.showMessageDialog(p2, "ì´ ì•„ì´ë””ëŠ” ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+					JOptionPane.showMessageDialog(p2, "ÀÌ ¾ÆÀÌµğ´Â »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.");
 				}else {
-					JOptionPane.showMessageDialog(p2, "ì•„ì´ë””ê°€ ì¤‘ë³µë©ë‹ˆë‹¤.");
+					JOptionPane.showMessageDialog(p2, "¾ÆÀÌµğ°¡ Áßº¹µË´Ï´Ù.");
 				}
 				
 			} });
@@ -143,8 +144,9 @@ public class JoinFrame extends JFrame {
 		
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.dispose();
-	}//ìƒì„±ì------
+	}//»ı¼ºÀÚ------
 	
+	//´Ù½Ã¾²±â 
 	public void Reset() {
 		tfId.setText("");
 		tfNickName.setText("");
@@ -154,7 +156,7 @@ public class JoinFrame extends JFrame {
 		tfEmail.setText("");
 		tfId.requestFocus();
 	}
-	
+	//È¸¿ø°¡ÀÔ
 	public void join() {
 		
 		String id=tfId.getText();
@@ -162,7 +164,17 @@ public class JoinFrame extends JFrame {
 		
 		char[] ch =tfPwd.getPassword();
 		String pwd=new String(ch);
+		char[] ch2=tfPwd2.getPassword();
+		String pwd2=new String(ch2);
 		
+		if(!pwd.equals(pwd2)) {
+			JOptionPane.showMessageDialog(p, "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö¾Ê½À´Ï´Ù");
+			tfPwd.setText("");
+			tfPwd2.setText("");
+			return;
+		}//ºñ¹Ğ¹øÈ£ Ã¼Å© 
+		
+		else {
 		String tel = tfTel.getText();
 		String email=tfEmail.getText();
 		
@@ -170,47 +182,28 @@ public class JoinFrame extends JFrame {
 		
 		userTable.put(id, user);
 		
-		saveFile("src/files/user.txt");
+		Common com =Common.getCommon();
+		com.saveFile("src/files/user.txt",userTable);
 		
-		setTitle("ì €ì¥ì™„ë£Œ"+userTable.size()+"ëª…");
+		setTitle("ÀúÀå¿Ï·á"+userTable.size()+"¸í");
 		
 		dispose();
+		}
 		
 	}
 	
 	
 	public boolean idCheck(String id) {
+		Common com =Common.getCommon();
+		Hashtable <String,Object> table=com.readFile("src/files/user.txt");
+		System.out.println("table===="+table);
+		return table.containsKey(id);
 		
-		return userTable.containsKey(id);
-		
 	}
 	
 	
-	
-	
-	public void saveFile(String fileName) {
-		try {
-			fout = new FileOutputStream(fileName);
-			out = new ObjectOutputStream(fout);
-			
-			out.writeUTF("UTF-8");
-			out.writeObject(userTable);
-			out.flush(); 
-			out.close();
-			
-			fout.close();
-
-			System.out.println(fileName+"ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤.");
-		}catch(IOException e) {
-			System.out.println("ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. : "+e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	public static void main(String[] args) {
-		JoinFrame my = new JoinFrame();
-		my.setSize(500, 600);
-		my.setVisible(true);
-	}
-
+	/*
+	 * public static void main(String[] args) { JoinFrame my = new JoinFrame();
+	 * my.setSize(500, 600); my.setVisible(true); }
+	 */
 }

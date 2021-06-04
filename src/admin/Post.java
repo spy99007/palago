@@ -9,22 +9,29 @@ public class Post extends JPanel{
 	JPanel p = new JPanel();
 	JPanel p1= new JPanel(new GridLayout(1,0,10,10));
 	JTextArea ta1;
-	MainPage mainF;
+	JButton btdelete;
 	
 	public Post(MainPage frame) {
 		MainPage mainF=frame;
 		p.setLayout(new BorderLayout());
-		p.setBackground(Color.white);
+		//p.setBackground(Color.white);
+		
 		add(p);
-		ta1=new JTextArea(20,20);
+		ta1=new JTextArea();
+		btdelete =new JButton("±Û»èÁ¦");
 		p.add(ta1);
 		p.add(p1,"South");
+		p1.add(btdelete);
+		
+		btdelete.setBackground(Color.DARK_GRAY);
+		btdelete.setForeground(Color.white);
+		
 		
 		
 		
 
 		
-	}//ìƒì„±ì------
+	}//»ı¼ºÀÚ------
 
 
 
